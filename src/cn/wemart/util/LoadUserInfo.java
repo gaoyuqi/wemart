@@ -7,24 +7,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.testng.annotations.Test;
-
+/**
+ * 
+ * @author sean
+ *
+ */
 public class LoadUserInfo {
 	
-	public static String path = "./UserInfo.properties";
+	public static String path = "../UserInfo.properties";
 	public static String adminAcct;
 	public static String password;
 	public static String type;
 	public static String objetcId;
-	public static String token;
-	public static String vertifycode; 
-	public static String applyNo;
-	public static String status; 
-	
-	private static Log log = LogFactory.getLog(LoadUserInfo.class);
-	
 	
 	/**
 	 * 加载测试数据
@@ -32,13 +26,9 @@ public class LoadUserInfo {
     static {
         Properties pro = readPropertiesFileObj(path); // 读取properties文件
         adminAcct = pro.getProperty("adminAcct");
-        token = pro.getProperty("token");
         type = pro.getProperty("type");
         objetcId = pro.getProperty("objetcId");
         password = pro.getProperty("password");
-        vertifycode = pro.getProperty("vertifycode");
-        applyNo = pro.getProperty("applyNo");
-        status = pro.getProperty("status");
 
     }
 
@@ -56,12 +46,4 @@ public class LoadUserInfo {
         return properties;
     }
     
-//    @Test
-//    public static void test() {
-//      String[] list = adminAcct.split(",");
-//      for(String x : list ){
-//    	  System.out.println(x);
-//      }
-//	}
-
 }

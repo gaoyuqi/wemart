@@ -1,16 +1,12 @@
 package cn.wemart.httppost;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.sf.json.JSONObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.NameValuePair;
@@ -19,12 +15,11 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.dom4j.DocumentException;
 
-import cn.wemart.goodsmng.group.Group;
 
 /**
  * 
@@ -54,27 +49,19 @@ public class ExecutePost {
 	 */
 	public static String getPostMethodResponse(CloseableHttpClient httpclient,String url,Object[][] keyValueList){
 		String xmlStr =null;
-		String str = "";
 		try {
 			Map<Object ,Object> postMap = setPostPara(keyValueList);
 			JSONObject object = JSONObject.fromObject(postMap);
 			log.info(url+"?para="+object.toString()+"");
-			System.out.println(url+"?para="+object.toString()+"");
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
-//			httpclient = HttpClients.createDefault();
 			HttpPost post = new HttpPost(url);
 
 			post.setEntity(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));
 			CloseableHttpResponse response = httpclient.execute(post);
 		
-			//解决中文编码问题
-			BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"UTF-8"));
-			StringBuffer sb = new StringBuffer();
-			while ((str = reader.readLine()) != null) {
-				sb.append(str).append("\n");
-			}
-			xmlStr = sb.toString().trim();
+			String responseEntiy = EntityUtils.toString(response.getEntity(),"UTF-8");
+			xmlStr = responseEntiy.trim();
 
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();

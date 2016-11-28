@@ -2,9 +2,9 @@
 <suite name="InterFaceTest">
 	<test verbose="2" preserve-order="true" name="InterFaceTest">
 		<classes>
-			<class name="com.util.test">
+			<class name="cn.wemart.usermng.shopLogin">
 				<methods>
-					<include name="Test"></include>
+					<include name="shopLoginTest"></include>
 				</methods>
 			</class>
 		</classes>
