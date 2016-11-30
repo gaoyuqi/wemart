@@ -2,7 +2,7 @@
 <suite name="InterFaceTest">
 	<test verbose="2" preserve-order="true" name="InterFaceTest">
 		<classes>
-			<class name="cn.wemart.usermng.shopLogin">
+			<class name="cn.wemart.usermng.ShopLogin">
 				<methods>
 					<include name="shopLoginTest"></include>
 				</methods>
