@@ -52,7 +52,7 @@ public class ExecutePut {
 	 * 获取接口返回字符串
 	 * @param url,需要传入的参数键值对
 	 */
-	public static String getPutMethodResponse(CloseableHttpClient httpclient,String url,Object[][] keyValueList) {
+	public static String getPutMethodResponse(CloseableHttpClient httpClient,String url,Object[][] keyValueList) {
 		String xmlStr =null;
 		String Str;
 		try {
@@ -68,7 +68,7 @@ public class ExecutePut {
 			HttpPut httpput = new HttpPut(url);
 	        String sendstr = EntityUtils.toString(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));  
 	        httpput.setURI(new URI(httpput.getURI().toString() + "?" + sendstr));
-			CloseableHttpResponse response = httpclient.execute(httpput);
+			CloseableHttpResponse response = httpClient.execute(httpput);
 			
 			
 			//解决中文编码问题

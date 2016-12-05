@@ -53,7 +53,7 @@ public class ExecuteDelete {
 	 * 获取接口返回字符串
 	 * @param url,需要传入的参数键值对
 	 */
-	public static String getDeleteMethodResponse(CloseableHttpClient httpclient,String url,Object[][] keyValueList) {
+	public static String getDeleteMethodResponse(CloseableHttpClient httpClient,String url,Object[][] keyValueList) {
 		String xmlStr =null;
 		String Str;
 		try {
@@ -70,7 +70,7 @@ public class ExecuteDelete {
 			HttpDelete httpdelete = new HttpDelete(url);
 	        String sendstr = EntityUtils.toString(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));  
 	        httpdelete.setURI(new URI(httpdelete.getURI().toString() + "?" + sendstr));
-			CloseableHttpResponse response = httpclient.execute(httpdelete);
+			CloseableHttpResponse response = httpClient.execute(httpdelete);
 			
 			
 			//解决中文编码问题

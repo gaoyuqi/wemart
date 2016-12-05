@@ -1,4 +1,4 @@
-package cn.wemart.function;
+package cn.wemart.userManagment;
 
 import net.sf.json.JSONObject;
 
@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 import com.TestNG.Assertion;
 
 import cn.wemart.httppost.ExecuteGet;
-import cn.wemart.usermng.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
 
@@ -42,7 +41,7 @@ public class IsLogin {
 	@Test
 	public static void Login(String mobile,String password, String type, String sllerId){
 		ShopLogin.DirectEnterShop(mobile, password, type, sllerId);
-		CloseableHttpClient httpClient = ShopLogin.httpclient;
+		CloseableHttpClient httpClient = ShopLogin.httpClient;
 		String loginFlag = determineLogin(httpClient);
 		if(Assertion.verifyEqual(loginFlag, "1")){
 			Reporter.log("该用户已登录！");

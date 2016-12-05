@@ -2,11 +2,14 @@
 <suite name="InterFaceTest">
 	<test verbose="2" preserve-order="true" name="InterFaceTest">
 		<classes>
-			<class name="cn.wemart.usermng.ShopLogin">
+			<class name="cn.wemart.executeTest.ExecuteTest">
 				<methods>
-					<include name="shopLoginTest"></include>
+					<include name="GetMenuList"></include>
 				</methods>
 			</class>
 		</classes>
 	</test>
+	<listeners>
+		<listener class-name="com.TestNG.AssertionListener" />
+	</listeners>
 </suite>

@@ -47,7 +47,7 @@ public class ExecutePost {
 	 * 获取接口返回字符串
 	 * @param url,需要传入的参数键值对
 	 */
-	public static String getPostMethodResponse(CloseableHttpClient httpclient,String url,Object[][] keyValueList){
+	public static String getPostMethodResponse(CloseableHttpClient httpClient,String url,Object[][] keyValueList){
 		String xmlStr =null;
 		try {
 			Map<Object ,Object> postMap = setPostPara(keyValueList);
@@ -58,7 +58,7 @@ public class ExecutePost {
 			HttpPost post = new HttpPost(url);
 
 			post.setEntity(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));
-			CloseableHttpResponse response = httpclient.execute(post);
+			CloseableHttpResponse response = httpClient.execute(post);
 		
 			String responseEntiy = EntityUtils.toString(response.getEntity(),"UTF-8");
 			xmlStr = responseEntiy.trim();

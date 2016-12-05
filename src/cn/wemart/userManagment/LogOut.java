@@ -1,19 +1,20 @@
-package cn.wemart.function;
+package cn.wemart.userManagment;
 
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.Reporter;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import bsh.org.objectweb.asm.Type;
 import cn.wemart.httppost.ExecutePost;
-import cn.wemart.usermng.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
 
 import com.TestNG.Assertion;
 
+@Listeners({com.TestNG.AssertionListener.class})
 public class LogOut {
 
 	/**
@@ -22,7 +23,7 @@ public class LogOut {
 	@Test
 	public static String logOut(String mobile,String password, String type, String sllerId){
 		ShopLogin.DirectEnterShop(mobile, password, type, sllerId);
-		CloseableHttpClient httpClient = ShopLogin.httpclient;
+		CloseableHttpClient httpClient = ShopLogin.httpClient;
 		
 		String url = LoadAPIInfo.url+"/api/authmng/quit";
 		Object[][] keyValueList = new Object[][]{};
@@ -37,7 +38,12 @@ public class LogOut {
 	@Test
 	public static void test(String mobile,String password, String type, String sllerId){
 		String returnValue = logOut("13818881111","123456","3","234");
-		Assertion.verifyEquals(returnValue, "0", "判断是否正确退出账号");
+		if(Assertion.verifyEqual(returnValue, "0")){
+			Reporter.log("退出账号成功");
+		}
+		else{
+			Reporter.log("退出账号失败");
+		}
 		Reporter.log(getCurrent.Time());
 	}
 }

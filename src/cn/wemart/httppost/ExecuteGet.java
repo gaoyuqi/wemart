@@ -56,7 +56,7 @@ public class ExecuteGet {
 	 * @throws DocumentException 
 	 * @throws URISyntaxException 
 	 */
-	public static String getGetMethodResponse(CloseableHttpClient httpclient,String url,Object[][] keyValueList) {
+	public static String getGetMethodResponse(CloseableHttpClient httpClient,String url,Object[][] keyValueList) {
 		String xmlStr =null;
 		String Str;
 		try {
@@ -76,7 +76,7 @@ public class ExecuteGet {
 			HttpGet httpget = new HttpGet(url);
 	        String sendstr = EntityUtils.toString(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));  
 			httpget.setURI(new URI(httpget.getURI().toString() + "?" + sendstr));
-			CloseableHttpResponse response = httpclient.execute(httpget);
+			CloseableHttpResponse response = httpClient.execute(httpget);
 			
 			
 			//处理response的中文编码
