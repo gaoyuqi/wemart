@@ -2,9 +2,9 @@
 <suite name="InterFaceTest">
 	<test verbose="2" preserve-order="true" name="InterFaceTest">
 		<classes>
-			<class name="cn.wemart.executeTest.ExecuteTest">
+			<class name="cn.wemart.executeTest.ExecuteMobileBuyerManagmentTest">
 				<methods>
-					<include name="GetMenuList"></include>
+					<include name="GetBuyerAddressTest"></include>
 				</methods>
 			</class>
 		</classes>

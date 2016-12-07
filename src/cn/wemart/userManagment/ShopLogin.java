@@ -44,7 +44,7 @@ public class ShopLogin {
 		String response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");
 		if (Assertion.verifyEqual(returnValue, "0")) {
-				Reporter.log("登录店铺成功！");
+				Reporter.log("登录店铺成功！"+ response);
 			}
 		else {
 				Reporter.log("登录店铺失败！" + response);

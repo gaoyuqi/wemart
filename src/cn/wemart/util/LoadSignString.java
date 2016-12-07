@@ -7,27 +7,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-/**
- * 
- * @author sean
- *
- */
-public class LoadAPIInfo {
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-	public static String path = "../URL.properties";
-	public static String url;
-	public static String userLoginAPI;
-	
-	
-	
+public class LoadSignString {
+
+	public static String path = "../Sign.properties";
+	public static String privateKey; //读取私钥
+	public static String publicKey; //读取公钥
+	public static String scenid; //读取scenid
+
 	
 	/**
 	 * 加载测试数据
 	 */
     static {
         Properties pro = readPropertiesFileObj(path); // 读取properties文件
-        url = pro.getProperty("url");
-        userLoginAPI = pro.getProperty("userLoginAPI"); //店铺登录
+        privateKey = pro.getProperty("privateKey");
+        publicKey = pro.getProperty("publicKey");
+        scenid = pro.getProperty("scenid");
+        
     }
 
 

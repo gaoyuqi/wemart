@@ -53,6 +53,7 @@ public class ExecutePost {
 			Map<Object ,Object> postMap = setPostPara(keyValueList);
 			JSONObject object = JSONObject.fromObject(postMap);
 			log.info(url+"?para="+object.toString()+"");
+			System.out.println(url+"?para="+object.toString()+"");
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
 			HttpPost post = new HttpPost(url);
