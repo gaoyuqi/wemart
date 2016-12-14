@@ -16,17 +16,17 @@ import cn.wemart.util.getCurrent;
 public class ExecuteMobileBuyerManagmentTest {
 	
 	@Test
-	public static void GetAddress() throws UnsupportedEncodingException{
+	public static void GetBuyerAddressTest() throws UnsupportedEncodingException{
 		String BuyerIdList = ReadExcel.Do(1);
 		String ScenIdList = ReadExcel.Do(0);
 		String[] ScenId = ScenIdList.split(",");
 		String[] BuyerId = BuyerIdList.split(",");
 		for (int j = 0; j < BuyerId.length; j++) {
-			GetBuyerAddressTest(ScenId[j],BuyerId[j]);
+			GetAddress(ScenId[j],BuyerId[j]);
 		}
 	}
 	
-	public static void GetBuyerAddressTest(String ScenId,String BuyerId) throws UnsupportedEncodingException{
+	public static void GetAddress(String ScenId,String BuyerId) throws UnsupportedEncodingException{
 		String returnValue = GetBuyerAddress.test(ScenId,BuyerId);
 		if(Assertion.verifyEqual(returnValue, "0")){
 			Reporter.log("获取买家地址成功！");
