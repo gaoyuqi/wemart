@@ -14,7 +14,7 @@ import java.util.Properties;
  */
 public class LoadUserInfo {
 	
-	public static String path = "./UserInfo.properties";
+	public static String path = "../UserInfo.properties";
 	public static String adminAcct;
 	public static String password;
 	public static String type;

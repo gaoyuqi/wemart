@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class LoadSignString {
 
-	public static String path = "./Sign.properties";
+	public static String path = "../Sign.properties";
 	public static String privateKey; //读取私钥
 	public static String publicKey; //读取公钥
 	public static String scenid; //读取scenid
