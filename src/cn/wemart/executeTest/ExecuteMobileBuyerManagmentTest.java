@@ -112,7 +112,7 @@ public class ExecuteMobileBuyerManagmentTest {
 		
 		for (int j = 0; j < BuyerId.length; j++) {
 			boolean flag = false;
-			if(isDefault[j].equals("true")){
+			if(isDefault[j].equals("1")){
 				flag=true;
 			}
 			getBuyerAddress.test(ScenId[j],BuyerId[j]);
