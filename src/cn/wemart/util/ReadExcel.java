@@ -24,12 +24,11 @@ public class ReadExcel {
 				if (row != null) {
 					Cell cell = row.getCell(columnNo);
 					if (cell != null) {
-						cell.setCellType(Cell.CELL_TYPE_STRING);
 						switch (cell.getCellType()) {
 						case Cell.CELL_TYPE_FORMULA:
 							break;
 						case Cell.CELL_TYPE_NUMERIC:
-							Integer valueString = Integer.valueOf(cell.getStringCellValue());
+							Integer valueString = (int)(cell.getNumericCellValue());
 							value += String.valueOf(valueString) + ",";
 							break;
 						case Cell.CELL_TYPE_STRING:
