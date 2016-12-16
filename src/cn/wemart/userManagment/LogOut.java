@@ -6,8 +6,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import bsh.org.objectweb.asm.Type;
 import cn.wemart.httppost.ExecutePost;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -22,8 +20,9 @@ public class LogOut {
 	 */
 	@Test
 	public static String logOut(String mobile,String password, String type, String sllerId){
-		ShopLogin.DirectEnterShop(mobile, password, type, sllerId);
-		CloseableHttpClient httpClient = ShopLogin.httpClient;
+		ShopLogin shopLogin = new ShopLogin();
+		shopLogin.DirectEnterShop(mobile, password, type, sllerId);
+		CloseableHttpClient httpClient = shopLogin.httpClient;
 		
 		String url = LoadAPIInfo.url+"/api/authmng/quit";
 		Object[][] keyValueList = new Object[][]{};
@@ -36,7 +35,7 @@ public class LogOut {
 	}
 	
 	@Test
-	public static void test(String mobile,String password, String type, String sllerId){
+	public void test(String mobile,String password, String type, String sllerId){
 		String returnValue = logOut("13818881111","123456","3","234");
 		if(Assertion.verifyEqual(returnValue, "0")){
 			Reporter.log("退出账号成功");

@@ -4,20 +4,14 @@ import java.io.UnsupportedEncodingException;
 
 import net.sf.json.JSONObject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.TestNG.Assertion;
-
 import cn.wemart.httppost.ExecutePost;
-import cn.wemart.httppost.ExecutePut;
 import cn.wemart.util.LoadAPIInfo;
-import cn.wemart.util.LoadSignString;
 import cn.wemart.util.RSASignature;
 import cn.wemart.util.getCurrent;
 
@@ -30,7 +24,7 @@ public class BuyerLogin {
 	 * @throws UnsupportedEncodingException 
 	 */
 	@Test
-	public static CloseableHttpClient Do(String scenId,String buyerId) throws UnsupportedEncodingException{
+	public CloseableHttpClient Do(String scenId,String buyerId) throws UnsupportedEncodingException{
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String url = LoadAPIInfo.url+"/api/shopping/buyer";
 		String scenType = "1";

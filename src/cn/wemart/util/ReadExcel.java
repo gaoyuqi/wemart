@@ -10,13 +10,13 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class ReadExcel {
 	
-	public static String Do(int columnNo) {
+	public static String Do(int sheetNo,int columnNo) {
 		String value = "";
 		try {
-			FileInputStream fs = new FileInputStream("../BuyerId.xls");
+			FileInputStream fs = new FileInputStream("./TestCaseInfo.xls");
 			POIFSFileSystem ps = new POIFSFileSystem(fs);
 			HSSFWorkbook workbook = new HSSFWorkbook(ps);
-			HSSFSheet sheet = workbook.getSheetAt(0);
+			HSSFSheet sheet = workbook.getSheetAt(sheetNo);
 			int rows = sheet.getPhysicalNumberOfRows();
 			// 遍历行
 			for (int i = 1; i < rows; i++) {
@@ -29,14 +29,11 @@ public class ReadExcel {
 						case Cell.CELL_TYPE_FORMULA:
 							break;
 						case Cell.CELL_TYPE_NUMERIC:
-							int valueNum = (int) cell.getNumericCellValue();
-							value += String.valueOf(valueNum) + ",";
-							value += cell.getNumericCellValue() + ",";
+							Integer valueString = Integer.valueOf(cell.getStringCellValue());
+							value += String.valueOf(valueString) + ",";
 							break;
 						case Cell.CELL_TYPE_STRING:
-							Integer valueString = (int) Float.parseFloat(cell.getStringCellValue());
-							value += String.valueOf(valueString) + ",";
-//							value += cell.getStringCellValue() + ",";
+							value += cell.getStringCellValue() + ",";
 							break;
 						default:
 							value += "0";

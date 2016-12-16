@@ -1,13 +1,9 @@
 package cn.wemart.util;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.http.client.utils.DateUtils;
-
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Date;
 
 public class RSASignature
 {

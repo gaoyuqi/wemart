@@ -5,6 +5,10 @@
 			<class name="cn.wemart.executeTest.ExecuteMobileBuyerManagmentTest">
 				<methods>
 					<include name="GetBuyerAddressTest"></include>
+					<include name="CreateBuyerAddressTest"></include>
+					<include name="UpdateBuyerAddressTest"></include>
+					<include name="SetBuyerAddressIsDefaultTest"></include>
+					<include name="DeleteBuyerAddressTest"></include>
 				</methods>
 			</class>
 		</classes>

@@ -1,14 +1,11 @@
 package cn.wemart.userManagment;
 
 import net.sf.json.JSONObject;
-
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-
 import com.TestNG.Assertion;
-
 import cn.wemart.httppost.ExecuteGet;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -20,7 +17,7 @@ public class IsLogin {
 	 * 未登录情况判断是否登录
 	 */
 	@Test
-	public static void NoLogin(){
+	public void NoLogin(){
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String loginFlag = determineLogin(httpClient);
 		if(Assertion.verifyEqual(loginFlag, "1")){
@@ -39,9 +36,10 @@ public class IsLogin {
 	 * 已登录的情况判断是否登录
 	 */
 	@Test
-	public static void Login(String mobile,String password, String type, String sllerId){
-		ShopLogin.DirectEnterShop(mobile, password, type, sllerId);
-		CloseableHttpClient httpClient = ShopLogin.httpClient;
+	public void Login(String mobile,String password, String type, String sllerId){
+		ShopLogin shopLogin = new ShopLogin();
+		shopLogin.DirectEnterShop(mobile, password, type, sllerId);
+		CloseableHttpClient httpClient = shopLogin.httpClient;
 		String loginFlag = determineLogin(httpClient);
 		if(Assertion.verifyEqual(loginFlag, "1")){
 			Reporter.log("该用户已登录！");
@@ -57,7 +55,7 @@ public class IsLogin {
 	 * 是否登录方法
 	 * @param httpClient
 	 */
-	public static String determineLogin(CloseableHttpClient httpClient){
+	public String determineLogin(CloseableHttpClient httpClient){
 		String url = LoadAPIInfo.url + "/api/authmng/login";
 		Object[][] keyValueList = new Object[][]{};
 		

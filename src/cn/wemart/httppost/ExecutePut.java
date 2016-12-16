@@ -62,8 +62,8 @@ public class ExecutePut {
 			JSONObject object = JSONObject.fromObject(postMap);
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
-			log.info(url+"?para="+object.toString()+"");
-			System.out.println(url+"?para="+object.toString()+"");
+//			log.info(url+"?para="+object.toString()+"");
+//			System.out.println(url+"?para="+object.toString()+"");
 			
 			HttpPut httpput = new HttpPut(url);
 	        String sendstr = EntityUtils.toString(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));  

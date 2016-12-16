@@ -19,7 +19,7 @@ public class VertifyCode {
 	 * 获取手机验证码
 	 */
 	@Test
-	public static void getVertifyCode(String mobile){
+	public void getVertifyCode(String mobile){
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String url = LoadAPIInfo.url + "/api/authmng/vertifycode";
 		Object[][] keyValueList = new Object[][]{

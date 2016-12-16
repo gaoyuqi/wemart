@@ -7,12 +7,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class LoadSignString {
 
-	public static String path = "../Sign.properties";
+	public static String path = "./Sign.properties";
 	public static String privateKey; //读取私钥
 	public static String publicKey; //读取公钥
 	public static String scenid; //读取scenid

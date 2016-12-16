@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import cn.wemart.httppost.ExecuteDelete;
-import cn.wemart.httppost.ExecutePost;
 import cn.wemart.httppost.ExecutePut;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -21,11 +15,12 @@ import cn.wemart.util.getCurrent;
 @Listeners({com.TestNG.AssertionListener.class})
 public class SaveRuleAuth {
 
-	public static String response;
+	public String response;
 	@Test
-	public static void saveRuleAuthTest(String mobile,String password, String type, String sllerId) {
-		ShopLogin.DirectEnterShop(mobile, password, type, sllerId);
-		CloseableHttpClient httpclient = ShopLogin.httpClient;
+	public void saveRuleAuthTest(String mobile,String password, String type, String sllerId) {
+		ShopLogin shopLogin = new ShopLogin();
+		shopLogin.DirectEnterShop(mobile, password, type, sllerId);
+		CloseableHttpClient httpclient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url + "/api/usermng/admin";
 		
 		Map<Object,Object> goodsmng = new HashMap<Object,Object>();

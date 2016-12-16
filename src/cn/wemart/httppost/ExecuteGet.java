@@ -68,11 +68,10 @@ public class ExecuteGet {
 			
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
-			log.info(url+"?para="+object.toString()+"");
-			System.out.println(url+"?para="+object.toString()+"");
+//			log.info(url+"?para="+object.toString()+"");
+//			System.out.println(url+"?para="+object.toString()+"");
 			
 			//发送转码过的字符串，发送
-//			httpclient = HttpClients.createDefault();
 			HttpGet httpget = new HttpGet(url);
 	        String sendstr = EntityUtils.toString(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));  
 			httpget.setURI(new URI(httpget.getURI().toString() + "?" + sendstr));

@@ -10,11 +10,12 @@ import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
 
 public class SaveUserInfo {
-	public static String response;
-
-	public static String test(String adminAcct, String password, String type,String objectId) {
-		ShopLogin.DirectEnterShop(adminAcct, password, type, objectId);
-		CloseableHttpClient httpclient = ShopLogin.httpClient;
+	
+	public String response;
+	public String test(String adminAcct, String password, String type,String objectId) {
+		ShopLogin shopLogin = new ShopLogin();
+		shopLogin.DirectEnterShop(adminAcct, password, type, objectId);
+		CloseableHttpClient httpclient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url + "/api/usermng/admin";
 		Object[][] keyValueList = new Object[][] {
 				{ "mobileNo", "13818811111" },

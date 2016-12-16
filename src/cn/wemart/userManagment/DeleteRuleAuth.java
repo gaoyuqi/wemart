@@ -14,8 +14,9 @@ public class DeleteRuleAuth {
 	public static String response;
 	@Test
 	public static String test(String mobile,String password, String type, String sllerId,String deleteAdminId) {
-		ShopLogin.DirectEnterShop(mobile, password, type, sllerId);
-		CloseableHttpClient httpclient = ShopLogin.httpClient;
+		ShopLogin shopLogin = new ShopLogin();
+		shopLogin.DirectEnterShop(mobile, password, type, sllerId);
+		CloseableHttpClient httpclient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url + "/api/usermng/admin";
 	
 		

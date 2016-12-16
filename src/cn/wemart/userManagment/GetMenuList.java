@@ -14,13 +14,13 @@ import cn.wemart.util.getCurrent;
 
 @Listeners({com.TestNG.AssertionListener.class})
 public class GetMenuList {
-	public static String response;
+	public String response;
 
 	@Test
-	public static String test(String mobile,String password, String type, String sllerId) {
-		
-		ShopLogin.DirectEnterShop(mobile, password, type, sllerId);
-		CloseableHttpClient httpClient = ShopLogin.httpClient;
+	public String test(String mobile,String password, String type, String sllerId) {
+		ShopLogin shopLogin = new ShopLogin();
+		shopLogin.DirectEnterShop(mobile, password, type, sllerId);
+		CloseableHttpClient httpClient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url+"/api/usermng/admin/authdata";
 		Object[][] keyValueList = new Object[][]{};
 		Reporter.log(getCurrent.Time());

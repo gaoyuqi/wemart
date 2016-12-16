@@ -21,7 +21,7 @@ public class IsRegistered {
 	 * 检查手机是否注册
 	 */
 	@Test
-	public static void isRegistered(String mobile){
+	public void isRegistered(String mobile){
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String url = LoadAPIInfo.url + "/api/authmng";
 		Object[][] keyValueList = new Object[][]{
