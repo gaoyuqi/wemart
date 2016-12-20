@@ -69,7 +69,7 @@ public class ExecuteGet {
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
 //			log.info(url+"?para="+object.toString()+"");
-//			System.out.println(url+"?para="+object.toString()+"");
+			System.out.println(url+"?para="+object.toString()+"");
 			
 			//发送转码过的字符串，发送
 			HttpGet httpget = new HttpGet(url);

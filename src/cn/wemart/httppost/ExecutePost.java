@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.Header;
+import org.apache.http.HttpHeaders;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -60,6 +64,10 @@ public class ExecutePost {
 			post.setEntity(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));
 			CloseableHttpResponse response = httpClient.execute(post);
 		
+//			Header[] header = response.getAllHeaders();
+//			for(Header x :header){
+//				System.out.println(x);
+//			}
 			String responseEntiy = EntityUtils.toString(response.getEntity(),"UTF-8");
 			xmlStr = responseEntiy.trim();
 

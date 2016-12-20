@@ -61,7 +61,6 @@ public class ExecuteChannelManagmentTest {
 		GetMyChannel getMyChannel = new GetMyChannel();
 		for(int i=0;i<mobile.length;i++){
 			String returnValue = getMyChannel.test(mobile[i],password[i]);
-			System.out.println(getMyChannel.response);
 			if (Assertion.verifyEqual(returnValue, "0")) {
 				Reporter.log("获取我的渠道成功！");
 			} else {

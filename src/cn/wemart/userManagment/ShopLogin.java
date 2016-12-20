@@ -32,7 +32,7 @@ public class ShopLogin {
 					};
 
 		Reporter.log(getCurrent.Time());
-		String response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
+		response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");
 		if (Assertion.verifyEqual(returnValue, "0")) {
 				Reporter.log("登录店铺成功！"+ response);
@@ -82,13 +82,38 @@ public class ShopLogin {
 					};
 
 		Reporter.log(getCurrent.Time());
-		String response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
+		response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");
 		if (Assertion.verifyEqual(returnValue, "0")) {
 			Reporter.log("进入店铺成功！");
 		}
-	else {
+		else {
 			Reporter.log("进入店铺失败！" + response);
+		}
+		Reporter.log(getCurrent.Time() + "\n");
+		return httpClient;
+	}
+	
+	/**
+	 * 进入渠道
+	 */
+	@Test
+	public CloseableHttpClient EnterChannel(String mobile,String password,String channelID){
+		httpClient = Login(mobile,password);
+		String url = LoadAPIInfo.url + LoadAPIInfo.userLoginAPI;
+
+		Object[][] keyValueList = new Object[][] {
+					{ "chanId", channelID }
+					};
+
+		Reporter.log(getCurrent.Time());
+		response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
+		String returnValue = JSONObject.fromObject(response).getString("returnValue");
+		if (Assertion.verifyEqual(returnValue, "0")) {
+			Reporter.log("进入渠道成功！");
+		}
+		else {
+			Reporter.log("进入渠道失败！" + response);
 		}
 		Reporter.log(getCurrent.Time() + "\n");
 		return httpClient;
