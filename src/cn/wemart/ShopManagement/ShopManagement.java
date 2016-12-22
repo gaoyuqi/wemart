@@ -25,12 +25,12 @@ public class ShopManagement {
 	public int method;
 	public String url;
 	public ShopManagement(String method,String url){
-		Map methodMap = new HashMap();
+		Map<String,String> methodMap = new HashMap<String,String>();
 		methodMap.put("post", "1");
 		methodMap.put("get", "2");
 		methodMap.put("put", "3");
 		methodMap.put("delete", "4");
-		this.method = Integer.valueOf((String) methodMap.get(method));
+		this.method = Integer.valueOf(methodMap.get(method));
 		this.url = url;
 	}
 	

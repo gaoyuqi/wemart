@@ -23,12 +23,12 @@ public class Scenario<K> {
 	public String response;
 	public int method;
 	public Scenario(String method){
-		Map methodMap = new HashMap();
+		Map<String,String> methodMap = new HashMap<String,String>();
 		methodMap.put("post", "1");
 		methodMap.put("get", "2");
 		methodMap.put("put", "3");
 		methodMap.put("delete", "4");
-		this.method = Integer.valueOf((String) methodMap.get(method));
+		this.method = Integer.valueOf(methodMap.get(method));
 	}
 
 	@Test

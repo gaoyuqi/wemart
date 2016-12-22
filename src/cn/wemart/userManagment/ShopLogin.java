@@ -98,12 +98,12 @@ public class ShopLogin {
 	 * 进入渠道
 	 */
 	@Test
-	public CloseableHttpClient EnterChannel(String mobile,String password,String channelID){
+	public CloseableHttpClient EnterChannel(String mobile,String password,String channelId){
 		httpClient = Login(mobile,password);
 		String url = LoadAPIInfo.url + LoadAPIInfo.userLoginAPI;
 
 		Object[][] keyValueList = new Object[][] {
-					{ "chanId", channelID }
+					{ "chanId", channelId }
 					};
 
 		Reporter.log(getCurrent.Time());

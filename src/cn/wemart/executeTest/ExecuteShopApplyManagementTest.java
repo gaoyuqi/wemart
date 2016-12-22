@@ -5,10 +5,8 @@ import net.sf.json.JSONObject;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.TestNG.Assertion;
-
-import cn.wemart.ShopManagement.ShopApplyManagement;
+import cn.wemart.userManagment.Channel;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.ReadExcel;
 import cn.wemart.util.getCurrent;
@@ -19,18 +17,18 @@ public class ExecuteShopApplyManagementTest {
 	public String getShopApplyList(String mobile, String password, String channelId){
 		String response;
 		String url = LoadAPIInfo.url+"/api/usermng/channel/sellerapplylist";
-		ShopApplyManagement SAM = new ShopApplyManagement("get", url);
+		Channel channel = new Channel("get", url);
 		Object[][] keyValueList = new Object[][]{
 				{"pageIndex",0},
 				{"pageSize",10},
 				{"status",1}
 				};
-		String returnValue = SAM.test(mobile, password, channelId, keyValueList);
-		response = SAM.response;
+		String returnValue = channel.test(mobile, password, channelId, keyValueList);
+		response = channel.response;
 		if (Assertion.verifyEqual(returnValue, "0")) {
 			Reporter.log("获取店铺申请列表成功！");
 		} else {
-			Reporter.log("获取店铺申请列表失败！\n Response：" + SAM.response);
+			Reporter.log("获取店铺申请列表失败！\n Response：" + channel.response);
 		}
 		return response;
 	}
@@ -44,7 +42,7 @@ public class ExecuteShopApplyManagementTest {
 		String[] password = passwordList.split(",");
 		String[] channelId = channelIdList.split(",");
 		String url = LoadAPIInfo.url+"/api/usermng/seller";
-		ShopApplyManagement SAM = new ShopApplyManagement("post", url);
+		Channel channel = new Channel("get", url);
 		for(int j=0;j<mobile.length;j++){
 			String response = getShopApplyList(mobile[j], password[j], channelId[j]);
 			if(response.contains("applyNo")){
@@ -55,11 +53,11 @@ public class ExecuteShopApplyManagementTest {
 						{"status","2"},    // 2未通过，3通过
 						{"approveRemark","这里是审核说明"}
 						};
-				String returnValue = SAM.test(mobile[j], password[j], channelId[j], keyValueList);
+				String returnValue = channel.test(mobile[j], password[j], channelId[j], keyValueList);
 				if (Assertion.verifyEqual(returnValue, "0")) {
 					Reporter.log("审核店铺成功！");
 				} else {
-					Reporter.log("审核店铺失败！\n Response：" + SAM.response);
+					Reporter.log("审核店铺失败！\n Response：" + channel.response);
 				}
 				Reporter.log(getCurrent.Time());
 			}
