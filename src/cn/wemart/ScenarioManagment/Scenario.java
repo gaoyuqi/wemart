@@ -24,11 +24,11 @@ public class Scenario<K> {
 	public int method;
 	public Scenario(String method){
 		Map methodMap = new HashMap();
-		methodMap.put("post", 1);
-		methodMap.put("get", 2);
-		methodMap.put("put", 3);
-		methodMap.put("delete", 4);
-		this.method = (int)methodMap.get(method);
+		methodMap.put("post", "1");
+		methodMap.put("get", "2");
+		methodMap.put("put", "3");
+		methodMap.put("delete", "4");
+		this.method = Integer.valueOf((String) methodMap.get(method));
 	}
 
 	@Test
