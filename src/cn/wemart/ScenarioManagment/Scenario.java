@@ -1,5 +1,8 @@
 package cn.wemart.ScenarioManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
@@ -15,12 +18,17 @@ import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
 
 @Listeners({com.TestNG.AssertionListener.class})
-public class Scenario {
+public class Scenario<K> {
 
 	public String response;
-	public String method;
+	public int method;
 	public Scenario(String method){
-		this.method = method;
+		Map methodMap = new HashMap();
+		methodMap.put("post", 1);
+		methodMap.put("get", 2);
+		methodMap.put("put", 3);
+		methodMap.put("delete", 4);
+		this.method = (int)methodMap.get(method);
 	}
 
 	@Test
@@ -32,16 +40,16 @@ public class Scenario {
 		String url = LoadAPIInfo.url + "/api/usermng/scenario";
 		Reporter.log(getCurrent.Time());
 		switch(method){
-		case "post" :
+		case 1 :
 			response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
 			break;
-		case "get" :
+		case 2 :
 			response = ExecuteGet.getGetMethodResponse(httpClient, url,keyValueList);
 			break;
-		case "put" :
+		case 3 :
 			response = ExecutePut.getPutMethodResponse(httpClient, url,keyValueList);
 			break;
-		case "delete" :
+		case 4 :
 			response = ExecuteDelete.getDeleteMethodResponse(httpClient, url,keyValueList);
 			break;
 		}

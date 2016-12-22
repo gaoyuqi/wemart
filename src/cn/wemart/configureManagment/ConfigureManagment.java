@@ -1,5 +1,8 @@
 package cn.wemart.configureManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -17,10 +20,15 @@ import cn.wemart.util.getCurrent;
 @Listeners({com.TestNG.AssertionListener.class})
 public class ConfigureManagment {
 	public String response;
-	public String method;
+	public int method;
 	public String url;
 	public ConfigureManagment(String method,String url){
-		this.method = method;
+		Map methodMap = new HashMap();
+		methodMap.put("post", 1);
+		methodMap.put("get", 2);
+		methodMap.put("put", 3);
+		methodMap.put("delete", 4);
+		this.method = (int)methodMap.get(method);
 		this.url = url;
 	}
 	
@@ -32,11 +40,17 @@ public class ConfigureManagment {
 		CloseableHttpClient httpClient = shopLogin.httpClient;
 		Reporter.log(getCurrent.Time());
 		switch(method){
-		case "get" :
+		case 1 :
+			response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
+			break;
+		case 2 :
 			response = ExecuteGet.getGetMethodResponse(httpClient, url,keyValueList);
 			break;
-		case "put" :
+		case 3 :
 			response = ExecutePut.getPutMethodResponse(httpClient, url,keyValueList);
+			break;
+		case 4 :
+			response = ExecuteDelete.getDeleteMethodResponse(httpClient, url,keyValueList);
 			break;
 		}
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");

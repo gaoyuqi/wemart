@@ -1,5 +1,8 @@
 package cn.wemart.ShopManagement;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -19,10 +22,15 @@ import cn.wemart.util.getCurrent;
 public class ShopManagement {
 	
 	public String response;
-	public String method;
+	public int method;
 	public String url;
 	public ShopManagement(String method,String url){
-		this.method = method;
+		Map methodMap = new HashMap();
+		methodMap.put("post", 1);
+		methodMap.put("get", 2);
+		methodMap.put("put", 3);
+		methodMap.put("delete", 4);
+		this.method = (int)methodMap.get(method);
 		this.url = url;
 	}
 	
@@ -34,16 +42,16 @@ public class ShopManagement {
 		CloseableHttpClient httpClient = shopLogin.httpClient;
 		Reporter.log(getCurrent.Time());
 		switch(method){
-		case "post" :
+		case 1 :
 			response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
 			break;
-		case "get" :
+		case 2 :
 			response = ExecuteGet.getGetMethodResponse(httpClient, url,keyValueList);
 			break;
-		case "put" :
+		case 3 :
 			response = ExecutePut.getPutMethodResponse(httpClient, url,keyValueList);
 			break;
-		case "delete" :
+		case 4 :
 			response = ExecuteDelete.getDeleteMethodResponse(httpClient, url,keyValueList);
 			break;
 		}
