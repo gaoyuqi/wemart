@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="InterFaceTest">
-	<test verbose="2" preserve-order="true" name="MobileBuyerManagmentTest">
+	<!-- test verbose="2" preserve-order="true" name="MobileBuyerManagmentTest">
 		<classes>
 			<class name="cn.wemart.executeTest.ExecuteMobileBuyerManagmentTest">
 				<methods>
@@ -28,6 +28,18 @@
 			<class name="cn.wemart.executeTest.ExecuteShopApplyManagementTest">
 				<methods>
 					<include name="checkApplyShop"></include>
+				</methods>
+			</class>
+		</classes>
+	</test -->
+	<test verbose="2" preserve-order="true" name="ShelfManagement">
+		<classes>
+			<class name="cn.wemart.executeTest.ExecuteShelfManagementTest">
+				<methods>
+					<include name="getShelf"></include>
+					<include name="createShelf"></include>
+					<include name="updateShelf"></include>
+					<include name="deleteShelf"></include>
 				</methods>
 			</class>
 		</classes>

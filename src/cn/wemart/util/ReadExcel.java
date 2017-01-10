@@ -13,7 +13,7 @@ public class ReadExcel {
 	public static String Do(int sheetNo,int columnNo) {
 		String value = "";
 		try {
-			FileInputStream fs = new FileInputStream("../TestCaseInfo.xls");
+			FileInputStream fs = new FileInputStream("./TestCaseInfo.xls");
 			POIFSFileSystem ps = new POIFSFileSystem(fs);
 			HSSFWorkbook workbook = new HSSFWorkbook(ps);
 			HSSFSheet sheet = workbook.getSheetAt(sheetNo);

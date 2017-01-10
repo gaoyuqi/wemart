@@ -14,7 +14,7 @@ import java.util.Properties;
  */
 public class LoadAPIInfo {
 
-	public static String path = "../URL.properties";
+	public static String path = "./URL.properties";
 	public static String url;
 	public static String userLoginAPI;
 	

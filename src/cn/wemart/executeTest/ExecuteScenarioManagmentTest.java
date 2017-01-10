@@ -21,7 +21,6 @@ public class ExecuteScenarioManagmentTest {
 		String[] mobile = mobileList.split(",");
 		String[] password = passwordList.split(",");
 		String[] sellerId = sellerIdList.split(",");
-		
 		Scenario createScenario = new Scenario("post");
 		Object[][] keyValueList = new Object[][]{
 				{"scenType","1"},
