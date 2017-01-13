@@ -45,6 +45,7 @@ public class BuyerLogin {
 			}
 			else{
 				Reporter.log("买家登录失败！\n Response："+response+"");
+				System.out.println("买家登录失败！\n Response："+response+"");
 			}
 			Reporter.log(getCurrent.Time()); 
 		}

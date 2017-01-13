@@ -40,10 +40,11 @@ public class ExecuteMobileBuyerManagmentTest {
 			Reporter.log(getCurrent.Time());
 		}
 	}
-	
+	//QsC0db1GY9D8j+g5tWjQj9qZQ9OAruzVpg1ZRBnD1ejTaw1JkOf3lA1hbU8lHbiM33FY7EVPSBKOP0bTMwzLjWs2YKg45lgjqHgc5XzL7LYWzq1BuPzCRG23s4kfqTygGJAtm2px4LmUy3DwST88EGKkDmB3e2gnQ1nb2iz2gBE=
+	//bG8WKCILS8aleOgxM6FSoKkyN29og+Zt81pGEgbBgNrP4edhWOIvMmhLkWzooVW2cb3wqzomeszH+lZYN25jPKoHn6gAXdz1wvZs5iQRzEy/Z60gR2ChTr1rrmplD9PaztnRzJrnrfkIuhtq6tnVy9+KHyy0wxYE3jbzsRJ/H6k=
 
 	
-	@Test
+//	@Test
 	public void CreateBuyerAddressTest() throws UnsupportedEncodingException{
 		CreateAddress createAddress = new CreateAddress();
 		String ScenIdList = ReadExcel.Do(1,0);
@@ -88,7 +89,7 @@ public class ExecuteMobileBuyerManagmentTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void UpdateBuyerAddressTest() throws UnsupportedEncodingException{
 		GetBuyerAddress getBuyerAddress = new GetBuyerAddress();
 		UpdateAddress updateAddress = new UpdateAddress();
@@ -140,7 +141,7 @@ public class ExecuteMobileBuyerManagmentTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void SetBuyerAddressIsDefaultTest() throws UnsupportedEncodingException{
 		GetBuyerAddress getBuyerAddress = new GetBuyerAddress();
 		SetBuyerAddressIsDefault setBuyerAddressIsDefault = new SetBuyerAddressIsDefault();
@@ -165,7 +166,7 @@ public class ExecuteMobileBuyerManagmentTest {
 	}
 	
 	
-	@Test
+//	@Test
 	public void DeleteBuyerAddressTest() throws UnsupportedEncodingException{
 		GetBuyerAddress getBuyerAddress =new GetBuyerAddress();
 		DeleteBuyerAddress deleteBuyerAddress = new DeleteBuyerAddress();
