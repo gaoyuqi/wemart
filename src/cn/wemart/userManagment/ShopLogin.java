@@ -1,13 +1,18 @@
 package cn.wemart.userManagment;
 
+import java.util.ArrayList;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.TestNG.Assertion;
+
 import net.sf.json.JSONObject;
 import cn.wemart.httppost.ExecutePost;
+import cn.wemart.util.GetDataDB;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
 
@@ -61,9 +66,11 @@ public class ShopLogin {
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");
 		if (Assertion.verifyEqual(returnValue, "0")) {
 			Reporter.log("登录账号成功！");
+			System.out.println("登录账号成功！");
 		}
 	else {
 			Reporter.log("登录账号失败！" + response);
+			System.out.println("登录账号失败！" + response);
 		}
 		Reporter.log(getCurrent.Time() + "\n");
 		return httpClient;
@@ -86,6 +93,7 @@ public class ShopLogin {
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");
 		if (Assertion.verifyEqual(returnValue, "0")) {
 			Reporter.log("进入店铺成功！");
+			System.out.println("进入店铺成功！");
 		}
 		else {
 			Reporter.log("进入店铺失败！" + response);
@@ -122,6 +130,11 @@ public class ShopLogin {
 	@Test
 	public  void main() {
 //		EnterShop("13818881111", "123456", "234");
-		DirectEnterShop("13818881111", "654321", "3", "234");
+		GetDataDB DB = new GetDataDB();
+		ArrayList<String> mobile = DB.sql("uat_api_test", "api_test_mobile", "mobile", "");
+		for(String x :mobile){
+			Login(x,"123456");
+		}
+		
 	}
 }

@@ -1,4 +1,4 @@
-package cn.wemart.executeTest;
+package cn.wemart.TestCase;
 
 import java.io.UnsupportedEncodingException;
 

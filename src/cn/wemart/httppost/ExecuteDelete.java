@@ -64,7 +64,7 @@ public class ExecuteDelete {
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
 //			log.info(url+"?para="+object.toString()+"");
-//			System.out.println(url+"?para="+object.toString()+"");
+			System.out.println(url+"?para="+object.toString()+"");
 			HttpDelete httpdelete = new HttpDelete(url);
 	        String sendstr = EntityUtils.toString(new UrlEncodedFormEntity(postPara,HTTP.UTF_8));  
 	        httpdelete.setURI(new URI(httpdelete.getURI().toString() + "?" + sendstr));

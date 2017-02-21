@@ -1,4 +1,4 @@
-package cn.wemart.executeTest;
+package cn.wemart.TestCase;
 
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;

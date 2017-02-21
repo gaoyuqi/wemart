@@ -21,7 +21,7 @@ public class GoodsManagement {
 	public int method;
 	public String url;
 	
-	public GoodsManagement(String method,String url){
+	public void Init(String method,String url){
 		Map<String,String> methodMap = new HashMap<String,String>();
 		methodMap.put("post", "1");
 		methodMap.put("get", "2");
@@ -30,13 +30,8 @@ public class GoodsManagement {
 		this.method = Integer.valueOf(methodMap.get(method));
 		this.url = url;
 	}
-
-	public String test(String mobile, String password, String sellerId, Object[][] keyValueList) {
-		ShopLogin shopLogin = new ShopLogin();
-		shopLogin.EnterShop(mobile, password, sellerId);
-		System.out.println(shopLogin.response);
-		CloseableHttpClient httpClient = shopLogin.httpClient;
-		String url = LoadAPIInfo.url + "/api/usermng/seller/decoration/navigator";
+	
+	public String Test(CloseableHttpClient httpClient, Object[][] keyValueList) {
 		Reporter.log(getCurrent.Time());
 		switch(method){
 		case 1 :

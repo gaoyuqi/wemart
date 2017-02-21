@@ -18,26 +18,13 @@ public class RSASignature
      * @param userId 前端为buyerId
      */
     public static String getSign(String appId,String userId) throws UnsupportedEncodingException {
-//        System.out.println( URLEncoder.encode(baozouSign, "UTF-8"));
-//        System.out.println(privateKey.length());
-//        System.out.println(publicKey.length());
-//        System.out.println(endTime);
-//        System.out.println(startTime);
-
-//    	System.out.println("++++++++++++"+privateKey+"++++++++++++");
-//    	System.out.println("++++++++++++"+publicKey+"++++++++++++");
-
-//        privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIWzeML/ReL0y7MF4PxP9PgDAiLes01cYbfTEhYUDuh+2v2pW9g61zlJU8MxP5Sc0y7ThHD5jBoFxmCUBniRfgygO1h7QNMr+zprqJ9HTFaMHFwbl6Leql8nOzL2vCMTZon+7iGhN9FpVK6iQnGOdCXc3iL3AFBgXL2HNUZqAcSJAgMBAAECgYBb7q7/rdVZHCegfk9YToZLro3eejDh5b7PTlPmWH5zwR5FQxmDEdqBanktAwUL49WWIhy0LfL2xbfFGqNkbe40M3e5DoDnwYhhYpRmJQbNy8QHagwAgJlNiLAZ7UZvH0W0oRvs7pqlE/nXyhm8JoAV+XBYH5q36aryVOf+lQaSAQJBAMPNkrPhSOLszl9SZ3CVredOjDj8Mi92ZB9wzvkfouo44VQTbdEtBlAd58Q+UDrJskH4xPWOUq/5yC38ZvicYcECQQCuzj5FKSNYJlnC8LleCJ/S3yTAk3YFY77BeVqu43hljPZ5e9vjfv+qlXlCo7qdOhdiKhG6XzrGH2OsUi8uMgTJAkEAiEF4Q2EUvYWZH1BS10/x0rMgdU9bBRhYGGECRu6zCldGxqE2nIe+iuYksLXEUwSk3a/mMBM4i2lA2m94oK0CgQJAGt7FH6h1MGWkwpxyQgwdVTLL2XZRW/67Ic5frCZ3KVUDxiTN5ihtcHFNlHrKgsSdN4+z7ewZgr7seV6gtf8mUQJANAeFVbmbn6nVAvNnna7urJYwHiO6fk0bkxJHzajwfqbAkq4/jAuFIVheFVxTH8JY7oMjPvCg/+EVUiESwjO39A==";
-//        publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFs3jC/0Xi9MuzBeD8T/T4AwIi3rNNXGG30xIWFA7oftr9qVvYOtc5SVPDMT+UnNMu04Rw+YwaBcZglAZ4kX4MoDtYe0DTK/s6a6ifR0xWjBxcG5ei3qpfJzsy9rwjE2aJ/u4hoTfRaVSuokJxjnQl3N4i9wBQYFy9hzVGagHEiQIDAQAB";
         String content = "appId="+appId+"&userId="+userId;
         String sign = null;
         boolean result = false;
         try
         {
             sign = sign(content, privateKey);
-//            System.out.println(sign);
             result = verify(content, sign, publicKey);
-//            System.out.println("result: " + result);
         } catch (Exception e)
         {
             e.printStackTrace();
