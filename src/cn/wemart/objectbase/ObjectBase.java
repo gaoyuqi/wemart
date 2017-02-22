@@ -1,4 +1,4 @@
-package cn.wemart.goodsManagement;
+package cn.wemart.objectbase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
 
-public class GoodsManagement {
+public class ObjectBase {
 	
 	public String response;
 	public int method;

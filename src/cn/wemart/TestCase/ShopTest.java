@@ -1,54 +1,51 @@
 package cn.wemart.TestCase;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.TestNG.Assertion;
-
-import cn.wemart.ShopManagement.ShopManagement;
+import cn.wemart.objectbase.ObjectBase;
+import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.ReadExcel;
 import cn.wemart.util.getCurrent;
 
 @Listeners({com.TestNG.AssertionListener.class})
-public class ExecuteShopManagementTest {
+public class ShopTest {
+	
+	String mobile = "13818881111";
+	String password = "123456";
+	String sellerId = "234";
+
+	CloseableHttpClient httpClient = HttpClients.createDefault();
+	ObjectBase ST = new ObjectBase();
+	String url = LoadAPIInfo.url+"/api/usermng/seller";
+	
+	public ShopTest() {
+		ShopLogin shopLogin = new ShopLogin();
+		shopLogin.EnterShop(mobile, password, sellerId);
+		httpClient = shopLogin.httpClient;
+	}
 	
 	@Test
 	public void getMyShopList(){
-		String mobileList = ReadExcel.Do(0,0);
-		String passwordList = ReadExcel.Do(0,1);
-		String sellerIdList = ReadExcel.Do(0,3);
-		String[] mobile = mobileList.split(",");
-		String[] password = passwordList.split(",");
-		String[] sellerId = sellerIdList.split(",");
-		String url = LoadAPIInfo.url+"/api/usermng/seller";
-		ShopManagement SM = new ShopManagement("get", url);
+		ST.Init("get", url);
 		Object[][] keyValueList = new Object[][]{
 				{"type","apply"}
 				};
-		for(int j=0;j<mobile.length;j++){
-			String returnValue = SM.test(mobile[j], password[j], sellerId[j], keyValueList);
+			String returnValue = ST.Test(httpClient, keyValueList);
 			if (Assertion.verifyEqual(returnValue, "0")) {
 				Reporter.log("获取我的店铺列表成功！");
 			} else {
-				Reporter.log("获取我的店铺列表失败！\n Response：" + SM.response);
+				Reporter.log("获取我的店铺列表失败！\n Response：" + ST.response);
 			}
 			Reporter.log(getCurrent.Time());
-		}
 	}
 	
 	@Test
 	public void applyShop(){
-		String mobileList = ReadExcel.Do(0,0);
-		String passwordList = ReadExcel.Do(0,1);
-		String sellerIdList = ReadExcel.Do(0,3);
-		String[] mobile = mobileList.split(",");
-		String[] password = passwordList.split(",");
-		String[] sellerId = sellerIdList.split(",");
 		
 		String shopNameList = ReadExcel.Do(3,0);
 		String logoUrlList = ReadExcel.Do(3,1);
@@ -59,21 +56,19 @@ public class ExecuteShopManagementTest {
 		String[] applyRemark = applyRemarkList.split(",");
 		String[] channelId = channelIdList.split(",");
 		
-		String url = LoadAPIInfo.url+"/api/usermng/seller";
-		ShopManagement SM = new ShopManagement("post", url);
-		
-		for(int j=0;j<mobile.length;j++){
+		ST.Init("post", url);
+		for(int j=0;j<shopName.length;j++){
 			Object[][] keyValueList = new Object[][]{
 					{"sellName",shopName[j]},
 					{"logoUrl",logoUrl[j]},
 					{"applyRemark",applyRemark[j]},
 					{"channelId",channelId[j]}
 					};
-			String returnValue = SM.test(mobile[j], password[j], sellerId[j], keyValueList);
+			String returnValue = ST.Test(httpClient, keyValueList);
 			if (Assertion.verifyEqual(returnValue, "0")) {
 				Reporter.log("申请店铺成功！");
 			} else {
-				Reporter.log("申请店铺失败！\n Response：" + SM.response);
+				Reporter.log("申请店铺失败！\n Response：" + ST.response);
 			}
 			Reporter.log(getCurrent.Time());
 		}

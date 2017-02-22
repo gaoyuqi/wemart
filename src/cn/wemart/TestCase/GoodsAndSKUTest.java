@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import com.TestNG.Assertion;
 
-import cn.wemart.goodsManagement.GoodsManagement;
+import cn.wemart.objectbase.ObjectBase;
 import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -29,7 +29,7 @@ public class GoodsAndSKUTest {
 	String sellerId="234";
 	
 	CloseableHttpClient httpClient = HttpClients.createDefault();
-	GoodsManagement GM = new GoodsManagement();
+	ObjectBase GM = new ObjectBase();
 	
 	public GoodsAndSKUTest(){
 		ShopLogin shopLogin = new ShopLogin();

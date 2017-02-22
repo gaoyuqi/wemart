@@ -15,9 +15,10 @@ import org.testng.annotations.Test;
 
 import com.TestNG.Assertion;
 
-import cn.wemart.goodsManagement.GoodsManagement;
 import cn.wemart.mobileBuyerManagment.UpdateAddress;
+import cn.wemart.objectbase.ObjectBase;
 import cn.wemart.userManagment.ShopLogin;
+import cn.wemart.util.GetDataDB;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
 
@@ -30,7 +31,7 @@ public class GoodsGroupTest {
 	String sellerId="234";
 	
 	CloseableHttpClient httpClient = HttpClients.createDefault();
-	GoodsManagement GM = new GoodsManagement();
+	ObjectBase GM = new ObjectBase();
 	
 	public GoodsGroupTest(){
 		ShopLogin shopLogin = new ShopLogin();
@@ -142,11 +143,91 @@ public class GoodsGroupTest {
 		}
 	}
 	
+	@Test
+	public void GoodsAddtoGroup(){
+		String dataBaseName = "wmplatform_gm";
+		String tableName = "tbl_gm_goods";
+		String outPutColumnName = "goods_id";
+		String condition = "WHERE seller_id = 234";
+		String tableName2 = "tbl_gm_group";
+		String condition2 = condition+" and group_no not in (SELECT parent_no FROM "+tableName2+" "+condition+" and parent_no != 0);";
+		String outPutColumnName2 = "group_no";
+		String url = LoadAPIInfo.url+"/api/goodsmng/group/goods";
+		GM.Init("post", url);
+		GetDataDB getData = new GetDataDB();
+		ArrayList<String> goodsIdList = getData.sql(dataBaseName, tableName, outPutColumnName, condition);
+		ArrayList<String> groupIdList = getData.sql(dataBaseName, tableName2, outPutColumnName2, condition2);
+		ArrayList<Map<String,Object>> goodsList = new ArrayList<Map<String,Object>>();
+		for(String goods : goodsIdList){
+			Map<String,Object> goodsId = new HashMap<String,Object>();
+			goodsId.put("goodsId", goods);
+			goodsId.put("ingrpSortno", 0);
+			goodsList.add(goodsId);
+		}
+		JSONArray goodsArray = JSONArray.fromObject(goodsList);
+		System.out.println(goodsArray.toString());
+		
+		Object[][] keyValueList = new Object[][]{
+				{"groupNoList",groupIdList},
+				{"goodsList",goodsArray}
+				}; 
+		
+		GM.Test(httpClient, keyValueList);
+		System.out.println("response="+GM.response);
+		JSONObject responseObject = JSONObject.fromObject(GM.response);
+		Integer returnValue = Integer.parseInt(responseObject.getString("returnValue"));
+		if(0 == returnValue){
+			System.out.println("商品添加分组成功! \n");
+		}
+		else{
+			System.out.println("商品添加分组失败!"+GM.response+"\n");
+		}
+	}
+	
+	
+	@Test
+	public void GroupDeleteGoods(){
+		String dataBaseName = "wmplatform_gm";
+		String tableName = "tbl_gm_goods";
+		String outPutColumnName = "goods_id";
+		String condition = "WHERE seller_id = 234";
+		String tableName2 = "tbl_gm_group";
+		String condition2 = condition+" and group_no not in (SELECT parent_no FROM "+tableName2+" "+condition+" and parent_no != 0);";
+		String outPutColumnName2 = "group_no";
+		String url = LoadAPIInfo.url+"/api/goodsmng/group/goods";
+		GM.Init("delete", url);
+		GetDataDB getData = new GetDataDB();
+		ArrayList<String> goodsIdList = getData.sql(dataBaseName, tableName, outPutColumnName, condition);
+		ArrayList<String> groupIdList = getData.sql(dataBaseName, tableName2, outPutColumnName2, condition2);
+		ArrayList<Map<String,Object>> goodsList = new ArrayList<Map<String,Object>>();
+		for(String goods : goodsIdList){
+			Map<String,Object> goodsId = new HashMap<String,Object>();
+			goodsId.put("goodsId", goods);
+			goodsList.add(goodsId);
+		}
+		JSONArray goodsArray = JSONArray.fromObject(goodsList);
+		System.out.println(goodsArray.toString());
+		
+		Object[][] keyValueList = new Object[][]{
+				{"groupNoList",groupIdList},
+				{"goodsList",goodsArray}
+				}; 
+		
+		GM.Test(httpClient, keyValueList);
+		System.out.println("response="+GM.response);
+		JSONObject responseObject = JSONObject.fromObject(GM.response);
+		Integer returnValue = Integer.parseInt(responseObject.getString("returnValue"));
+		if(0 == returnValue){
+			System.out.println("分组删除商品成功! \n");
+		}
+		else{
+			System.out.println("分组删除商品失败!"+GM.response+"\n");
+		}
+	}
+	
+	
 	public static void main(String[] args) {
 		GoodsGroupTest GGT = new GoodsGroupTest();
-		GGT.CreateGoodsGroup();
-		GGT.UpdateGoodsGroup();
-		GGT.GetGoodsGroup();
-		GGT.DeleteGoodsGroup();
+		GGT.GroupDeleteGoods();
 	}
 }

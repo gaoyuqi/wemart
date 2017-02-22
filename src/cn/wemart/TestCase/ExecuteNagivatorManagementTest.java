@@ -13,7 +13,6 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import cn.wemart.navigatorManagement.NavigatorManagement;
-import cn.wemart.shelfManagement.ShelfManagement;
 import cn.wemart.util.ReadExcel;
 
 import com.TestNG.Assertion;
