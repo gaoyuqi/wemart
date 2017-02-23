@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.sf.json.JSONArray;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import cn.wemart.httppost.ExecutePut;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -23,38 +26,21 @@ public class SaveRuleAuth {
 		CloseableHttpClient httpclient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url + "/api/usermng/admin";
 		
-		Map<Object,Object> goodsmng = new HashMap<Object,Object>();
-		goodsmng.put("goodsmng", 1);
-		
-		Map<Object,Object> usermng = new HashMap<Object,Object>();
-		usermng.put("usermng", 1);
-		
-		Map<Object,Object> marketmng = new HashMap<Object,Object>();
-		marketmng.put("marketmng", 1);
-		
-		Map<Object,Object> fundsmng = new HashMap<Object,Object>();
-		fundsmng.put("fundsmng", 1);
-		
-		Map<Object,Object> ordermng = new HashMap<Object,Object>();
-		ordermng.put("ordermng", 1);
-		
-		List<Object> roleAuth = new ArrayList<Object>();
-		roleAuth.add(goodsmng);
-		roleAuth.add(usermng);
-		roleAuth.add(marketmng);
-		roleAuth.add(fundsmng);
-		roleAuth.add(ordermng);
-		
+		Map<Object,Object> roleAuth = new HashMap<Object,Object>();
+		roleAuth.put("goodsmng", 1);
+		roleAuth.put("usermng", 1);
+		roleAuth.put("marketmng", 1);
+		roleAuth.put("fundsmng", 1);
+		roleAuth.put("ordermng", 1);
 		JSONArray roleAutharray = JSONArray.fromObject(roleAuth);
 		JSONArray excludeRoleAuth = JSONArray.fromObject("[]");
 		
-		Object[][] keyValueList = new Object[][]{
-				{"adminAcct","13818813333"}, // 手机号 (必填)
-				{"adminNo","215"}, // 管理员编号
-				{"roleName","管理员"},    // 角色名 （必填）
-				{"roleAuth",roleAutharray}, 
-				{"excludeRoleAuth",excludeRoleAuth}
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("adminAcct","13818813333");
+		keyValueList.put("adminNo","215");
+		keyValueList.put("roleName","管理员");
+		keyValueList.put("roleAuth",roleAutharray);
+		keyValueList.put("excludeRoleAuth",excludeRoleAuth);
 		
 		
 		System.out.println(getCurrent.Time());

@@ -7,6 +7,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.Reporter;
+
 import cn.wemart.httppost.ExecuteDelete;
 import cn.wemart.httppost.ExecuteGet;
 import cn.wemart.httppost.ExecutePost;
@@ -31,7 +32,7 @@ public class ObjectBase {
 		this.url = url;
 	}
 	
-	public String Test(CloseableHttpClient httpClient, Object[][] keyValueList) {
+	public String Test(CloseableHttpClient httpClient, Map<String,Object> keyValueList) {
 		Reporter.log(getCurrent.Time());
 		switch(method){
 		case 1 :

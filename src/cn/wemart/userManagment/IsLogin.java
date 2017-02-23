@@ -1,11 +1,17 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+
 import com.TestNG.Assertion;
+
 import cn.wemart.httppost.ExecuteGet;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -57,7 +63,7 @@ public class IsLogin {
 	 */
 	public String determineLogin(CloseableHttpClient httpClient){
 		String url = LoadAPIInfo.url + "/api/authmng/login";
-		Object[][] keyValueList = new Object[][]{};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		
 		Reporter.log(getCurrent.Time());
 		String response = ExecuteGet.getGetMethodResponse(httpClient, url, keyValueList);

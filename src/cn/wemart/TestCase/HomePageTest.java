@@ -1,13 +1,19 @@
 package cn.wemart.TestCase;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import cn.wemart.objectbase.ObjectBase;
 import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
+
 import com.TestNG.Assertion;
 
 @Listeners({ com.TestNG.AssertionListener.class })
@@ -30,7 +36,7 @@ public class HomePageTest {
 	public String getShelf() {
 		String url = LoadAPIInfo.url + "/api/usermng/seller/decoration/shelf";
 		HT.Init("get", url);
-		Object[][] keyValueList = new Object[][] {};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		String returnValue = HT.Test(httpClient, keyValueList);
 		String shelfNo = JSONObject.fromObject(HT.response).getJSONArray("data").getJSONObject(0).getString("shelfNo");
 		System.out.println(shelfNo);
@@ -47,7 +53,9 @@ public class HomePageTest {
 		String url = LoadAPIInfo.url + "/api/usermng/seller/decoration/shelf/homepage";
 		HT.Init("put", url);
 		String shelfNo = getShelf();
-		Object[][] keyValueList = new Object[][] { { "shelfNo", shelfNo } };
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("shelfNo", shelfNo);
+		
 		String returnValue = HT.Test(httpClient, keyValueList);
 		if (Assertion.verifyEqual(returnValue, "0")) {
 			Reporter.log("设置主页成功！");

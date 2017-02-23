@@ -36,19 +36,6 @@ import org.dom4j.DocumentException;
 public class ExecuteGet {
 	
 	private static Log log = LogFactory.getLog(ExecuteGet.class);
-
-	/**
-	 * 组装请求参数
-	 * @param keyVlaueList
-	 */
-	public static Map<Object ,Object> setPostPara(Object[][] keyValueList) throws DocumentException{
-		Map<Object ,Object> map = new HashMap<Object ,Object>();
-		for(int i = 0;i<keyValueList.length;i++)
-		{
-			map.put(keyValueList[i][0],keyValueList[i][1]);
-		}
-		return map;
-	}
 	
 	/**
 	 * 获取接口返回字符串
@@ -56,15 +43,13 @@ public class ExecuteGet {
 	 * @throws DocumentException 
 	 * @throws URISyntaxException 
 	 */
-	public static String getGetMethodResponse(CloseableHttpClient httpClient,String url,Object[][] keyValueList) {
+	public static String getGetMethodResponse(CloseableHttpClient httpClient,String url,Map<String,Object> keyValueList) {
 		String xmlStr =null;
 		String Str;
 		try {
 			
 			//把键值对转换成JSON格式串
-			Map<Object, Object> postMap;
-			postMap = setPostPara(keyValueList);
-			JSONObject object = JSONObject.fromObject(postMap);
+			JSONObject object = JSONObject.fromObject(keyValueList);
 			
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
@@ -93,8 +78,6 @@ public class ExecuteGet {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			} catch (DocumentException e) {
 				e.printStackTrace();
 			}
 		return xmlStr;

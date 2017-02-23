@@ -1,6 +1,8 @@
 package cn.wemart.mobileBuyerManagment;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.json.JSONObject;
 
@@ -22,9 +24,8 @@ public class GetBuyerAddress {
 	public String test(String scenId,String BuyerId) throws UnsupportedEncodingException{
 		BuyerLogin buyerLogin = new BuyerLogin();
 		httpClient = buyerLogin.Do(scenId, BuyerId);
-		Object[][] keyValueList = new Object[][]{
-				{"addrNo",""},
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("addrNo","");
 		
 		String url = LoadAPIInfo.url + "/api/usermng/buyer/address";
 		

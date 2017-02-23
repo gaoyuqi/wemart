@@ -32,7 +32,7 @@ public class ExecuteNagivatorManagementTest {
 		String[] password = passwordList.split(",");
 		String[] sellerId = sellerIdList.split(",");
 		NavigatorManagement NM = new NavigatorManagement("get");
-		Object[][] keyValueList = new Object[][]{};
+		Map<String, Object> keyValueList = new HashMap<String, Object>();
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = NM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			System.out.println(NM.response);
@@ -54,21 +54,19 @@ public class ExecuteNagivatorManagementTest {
 		String[] password = passwordList.split(",");
 		String[] sellerId = sellerIdList.split(",");
 		NavigatorManagement NM = new NavigatorManagement("post");
-		Map<Object, Object> navSettingmap = new HashMap<Object, Object>();
+		Map<String, Object> navSettingmap = new HashMap<String, Object>();
 		navSettingmap.put("navStyle", 2);
 		navSettingmap.put("navBgColor", "#000000");
 		navSettingmap.put("navHome", true);
 		navSettingmap.put("navGroup", false);
-		Map<Object, Object> navigatorContentmap = new HashMap<Object, Object>();
-		navigatorContentmap.put("navSetting", JSONObject.fromObject(navSettingmap));
+		Map<String, Object> navigatorContentmap = new HashMap<String, Object>();
+		navigatorContentmap.put("navSetting", navSettingmap);
 		navigatorContentmap.put("navData", JSONArray.fromObject("[]"));
 		navigatorContentmap.put("isOpen", true);
-		JSONObject navigatorContentdata = JSONObject.fromObject(navigatorContentmap);
 
 		for(int j=0;j<mobile.length;j++){
-			Object[][] keyValueList = new Object[][]{
-					{"navigatorContent",navigatorContentdata}
-					};
+			Map<String, Object> keyValueList = new HashMap<String, Object>();
+			keyValueList.put("navigatorContent",navigatorContentmap);
 			String returnValue = NM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			System.out.println(NM.response);
 			if(Assertion.verifyEqual(returnValue, "0")){
@@ -95,16 +93,14 @@ public class ExecuteNagivatorManagementTest {
 		navSettingmap.put("navHome", true);
 		navSettingmap.put("navGroup", false);
 		Map<Object, Object> navigatorContentmap = new HashMap<Object, Object>();
-		navigatorContentmap.put("navSetting", JSONObject.fromObject(navSettingmap));
+		navigatorContentmap.put("navSetting", navSettingmap);
 		navigatorContentmap.put("navData", JSONArray.fromObject("[]"));
 		navigatorContentmap.put("isOpen", true);
-		JSONObject navigatorContentdata = JSONObject.fromObject(navigatorContentmap);
 
 		for(int j=0;j<mobile.length;j++){
-			Object[][] keyValueList = new Object[][]{
-					{"navigatorContent",navigatorContentdata},
-					{"bgColor","#eeffee"}
-					};
+			Map<String,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("navigatorContent",navigatorContentmap);
+			keyValueList.put("bgColor","#eeffee");
 			String returnValue = NM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			System.out.println(NM.response);
 			if(Assertion.verifyEqual(returnValue, "0")){

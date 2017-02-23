@@ -1,9 +1,14 @@
 package cn.wemart.TestCase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.TestNG.Assertion;
+
 import cn.wemart.configureManagment.ConfigureManagment;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.ReadExcel;
@@ -21,7 +26,7 @@ public class ExecuteConfigureManagmentTest {
 		String[] sellerId = sellerIdList.split(",");
 		String url = LoadAPIInfo.url+"/api/marketmng/config/middlemkt/commseller";
 		ConfigureManagment CM = new ConfigureManagment("get",url);
-		Object[][] keyValueList = new Object[][]{};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = CM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){
@@ -44,7 +49,8 @@ public class ExecuteConfigureManagmentTest {
 		String url = LoadAPIInfo.url+"/api/marketmng/config/middlemkt/commseller";
 		ConfigureManagment CM = new ConfigureManagment("put",url);
 		int[] valueList ={1,0};
-		Object[][] keyValueList = new Object[][]{{"valueList",valueList}};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("valueList",valueList);
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = CM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){
@@ -66,7 +72,7 @@ public class ExecuteConfigureManagmentTest {
 		String[] sellerId = sellerIdList.split(",");
 		String url = LoadAPIInfo.url+"/api/usermng/seller/config";
 		ConfigureManagment CM = new ConfigureManagment("get",url);
-		Object[][] keyValueList = new Object[][]{};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = CM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			System.out.println(CM.response);
@@ -90,10 +96,10 @@ public class ExecuteConfigureManagmentTest {
 		String url = LoadAPIInfo.url+"/api/usermng/seller/config";
 		ConfigureManagment CM = new ConfigureManagment("put",url);
 		int[] valueList ={ 1,1,1,0,1,2,1,0};//参数说明请见WIKI： http://wiki.wemart.cn/pages/viewpage.action?pageId=2230410
-		Object[][] keyValueList = new Object[][]{
-				{"valueList",valueList},
-				{"bgColor","#ffffff"}
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("valueList",valueList);
+		keyValueList.put("bgColor","#ffffff");
+		
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = CM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){
@@ -115,7 +121,7 @@ public class ExecuteConfigureManagmentTest {
 		String[] sellerId = sellerIdList.split(",");
 		String url = LoadAPIInfo.url+"/api/usermng/seller/config/customer";
 		ConfigureManagment CM = new ConfigureManagment("get",url);
-		Object[][] keyValueList = new Object[][]{};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = CM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){
@@ -137,11 +143,10 @@ public class ExecuteConfigureManagmentTest {
 		String[] sellerId = sellerIdList.split(",");
 		String url = LoadAPIInfo.url+"/api/usermng/seller/config/customer";
 		ConfigureManagment CM = new ConfigureManagment("put",url);
-		Object[][] keyValueList = new Object[][]{
-				{"sellerCsLink","http://www.google.com"},
-				{"owner","0"},
-				{"openFlag","0"}
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("sellerCsLink","http://www.google.com");
+		keyValueList.put("owner","0");
+		keyValueList.put("openFlag","0");
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = CM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){
@@ -163,9 +168,8 @@ public class ExecuteConfigureManagmentTest {
 		String[] sellerId = sellerIdList.split(",");
 		String url = LoadAPIInfo.url+"/api/fundsmng/config/settlefeecfg";
 		ConfigureManagment CM = new ConfigureManagment("put",url);
-		Object[][] keyValueList = new Object[][]{
-				{"settleType","7"}
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("settleType","7");
 		for(int j=0;j<mobile.length;j++){
 			String returnValue = CM.test(mobile[j], password[j], sellerId[j], keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){

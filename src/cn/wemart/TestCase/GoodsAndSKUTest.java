@@ -62,7 +62,6 @@ public class GoodsAndSKUTest {
 		goodsSku1.put("barcode", "");
 		goodsSku1.put("retailGoodsSkuList", retailGoodsSku1);
 		goodsSku1.put("skuContent", skuContent1);
-		JSONObject goodsSku1Object = JSONObject.fromObject(goodsSku1);
 		
 		Map<Object ,Object> retailGoodsSkuList2 = new HashMap<Object,Object>();
 		retailGoodsSkuList2.put("marketPrice", 10000);
@@ -83,36 +82,32 @@ public class GoodsAndSKUTest {
 		goodsSku2.put("barcode", "");
 		goodsSku2.put("retailGoodsSkuList", retailGoodsSku2);
 		goodsSku2.put("skuContent", skuContent2);
-		JSONObject goodsSku2Object = JSONObject.fromObject(goodsSku2);
 		
-		ArrayList<Object> goodsSkuArrayList = new ArrayList<Object>();
-		goodsSkuArrayList.add(goodsSku1Object);
-		goodsSkuArrayList.add(goodsSku2Object);
-		
-		JSONArray goodsSkuList = JSONArray.fromObject(goodsSkuArrayList);
+		ArrayList<Object> goodsSkuList = new ArrayList<Object>();
+		goodsSkuList.add(goodsSku1);
+		goodsSkuList.add(goodsSku2);
 		
 		Map<Object ,Object> component = new HashMap<Object,Object>();
 		component.put("text", "test");
-		JSONObject componentObject = JSONObject.fromObject(component);
 		
 		Map<Object ,Object> detail = new HashMap<Object,Object>();
 		detail.put("type", "richText");
-		detail.put("component", componentObject);
+		detail.put("component", component);
 		JSONArray detailList = JSONArray.fromObject(detail);
 		
-		Object[][] keyValueList = new Object[][]{
-				{"goodsName","dxssdfs"},
-				{"catNo","536898771"},
-				{"mainpicNo","5708"},
-				{"picNos",ListEmpty},
-				{"goodsBrief",""},
-				{"onshelf","1"},
-				{"isFarefree","1"},
-				{"faretmpltNo",""},
-				{"brandNo",""},
-				{"detail",detailList},
-				{"goodsSkuList",goodsSkuList}
-				}; 
+		Map<String ,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("goodsName","dxssdfs");
+		keyValueList.put("catNo","536898771");
+		keyValueList.put("mainpicNo","5708");
+		keyValueList.put("picNos",ListEmpty);
+		keyValueList.put("goodsBrief","");
+		keyValueList.put("onshelf","1");
+		keyValueList.put("isFarefree","1");
+		keyValueList.put("faretmpltNo","");
+		keyValueList.put("brandNo","");
+		keyValueList.put("detail",detailList);
+		keyValueList.put("goodsSkuList",goodsSkuList);
+		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
 		JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -133,24 +128,22 @@ public class GoodsAndSKUTest {
 		JSONArray ListEmpty = JSONArray.fromObject("[]");
 		Map<Object ,Object> component = new HashMap<Object,Object>();
 		component.put("text", "<iframe src='https://v.qq.com/iframe/player.html?vid=c0374ggk8h2&tiny=0&auto=0'></iframe>");
-		JSONObject componentObject = JSONObject.fromObject(component);
 		Map<Object ,Object> detail = new HashMap<Object,Object>();
 		detail.put("type", "richText");
-		detail.put("component", componentObject);
+		detail.put("component", component);
 		JSONArray detailList = JSONArray.fromObject(detail);
 		
-		Object[][] keyValueList = new Object[][]{
-				{"goodsId",goodsId},
-				{"goodsName","xooxxoox"},
-				{"catNo","536898771"},
-				{"mainpicNo","5708"},
-				{"picNos",ListEmpty},
-				{"goodsBrief",""},
-				{"faretmpltNo",""},
-				{"brandNo",""},
-				{"detail",detailList},
-				{"redefineFlag",1}
-				}; 
+		Map<String ,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("goodsId",goodsId);
+		keyValueList.put("goodsName","xooxxoox");
+		keyValueList.put("catNo","536898771");
+		keyValueList.put("mainpicNo","5708");
+		keyValueList.put("picNos",ListEmpty);
+		keyValueList.put("goodsBrief","");
+		keyValueList.put("faretmpltNo","");
+		keyValueList.put("brandNo","");
+		keyValueList.put("detail",detailList);
+		keyValueList.put("redefineFlag",1);
 		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
@@ -169,7 +162,7 @@ public class GoodsAndSKUTest {
 		System.out.println(getCurrent.Time());
 		String url = LoadAPIInfo.url+"/api/goodsmng/goods";
 		GM.Init("get",url);
-		Object[][] keyValueList = new Object[][]{}; 
+		Map<String ,Object> keyValueList = new HashMap<String,Object>();
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
 		JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -188,9 +181,8 @@ public class GoodsAndSKUTest {
 		System.out.println(getCurrent.Time());
 		String url = LoadAPIInfo.url+"/api/goodsmng/goods/goodsdetail";
 		GM.Init("get",url);
-		Object[][] keyValueList = new Object[][]{
-				{"goodsId",goodsId}
-				}; 
+		Map<String ,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("goodsId",goodsId);
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
 		JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -210,13 +202,12 @@ public class GoodsAndSKUTest {
 		String url = LoadAPIInfo.url+"/api/goodsmng/goods";
 		GM.Init("put",url);
 		ArrayList<String> goodsList = new ArrayList<String>();
-		goodsList.add(goodsId);
-		JSONArray goodsIdList = JSONArray.fromObject(goodsList);
+		goodsList.add("gd100086");
 		
-		Object[][] keyValueList = new Object[][]{
-				{"goodsIdList",goodsIdList},
-				{"onshelf",1}
-				}; 
+		Map<String ,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("goodsIdList",goodsList);
+		keyValueList.put("onshelf",1);
+		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
 		JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -230,6 +221,11 @@ public class GoodsAndSKUTest {
 		System.out.println(getCurrent.Time());
 	}
 	
+	public static void main(String[] args) {
+		GoodsAndSKUTest gg = new GoodsAndSKUTest();
+		gg.PutGoodsOnshelf();
+	}
+	
 	
 //	@Test
 	public void GetGoodsAggregate(){
@@ -238,11 +234,10 @@ public class GoodsAndSKUTest {
 		GM.Init("get",url);
 		ArrayList<String> goodsList = new ArrayList<String>();
 		goodsList.add(goodsId);
-		JSONArray goodsIdList = JSONArray.fromObject(goodsList);
 		
-		Object[][] keyValueList = new Object[][]{
-				{"goodsIdList",goodsIdList}
-				}; 
+		Map<String ,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("goodsIdList",goodsList);
+		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
 		JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -262,9 +257,8 @@ public class GoodsAndSKUTest {
 		String url = LoadAPIInfo.url+"/api/goodsmng/goods/goodssku";
 		GM.Init("get",url);
 		if(goodsId != null ){
-			Object[][] keyValueList = new Object[][]{
-					{"goodsId",goodsId}
-					}; 
+			Map<String ,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("goodsId",goodsId);
 
 			GM.Test(httpClient, keyValueList);
 			System.out.println("response="+GM.response);
@@ -286,12 +280,12 @@ public class GoodsAndSKUTest {
 		String url = LoadAPIInfo.url+"/api/goodsmng/goods/goodssku/sales";
 		GM.Init("put",url);
 		if(goodsSkuId != null){
-			Object[][] keyValueList = new Object[][]{
-					{"deltaSalesVol",2},
-					{"goodsskuId",goodsSkuId},
-					{"moneyUnit","CNY"}
-					}; 
-
+			
+			Map<String ,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("deltaSalesVol",2);
+			keyValueList.put("goodsskuId",goodsSkuId);
+			keyValueList.put("moneyUnit","CNY");
+			
 			GM.Test(httpClient, keyValueList);
 			System.out.println("response="+GM.response);
 			JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -312,12 +306,11 @@ public class GoodsAndSKUTest {
 		String url = "https://uat.wemart.cn/api/goodsmng/goods/goodssku/stock";
 		GM.Init("put",url);
 		if(goodsSkuId != null){
-			Object[][] keyValueList = new Object[][]{
-					{"deltaStock",-4},
-					{"goodsskuId",goodsSkuId},//"sku12818"
-					{"moneyUnit","CNY"}
-					}; 
-
+			Map<String ,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("deltaStock",-4);
+			keyValueList.put("goodsskuId",goodsSkuId);
+			keyValueList.put("moneyUnit","CNY");
+			
 			GM.Test(httpClient, keyValueList);
 			System.out.println("response="+GM.response);
 			JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -350,9 +343,8 @@ public class GoodsAndSKUTest {
 			goodsSkuPriceListMap.put("marketPrice", 10000);
 			JSONArray goodsSkuPriceList = JSONArray.fromObject(goodsSkuPriceListMap);
 			
-			Object[][] keyValueList = new Object[][]{
-					{"goodsSkuPriceList",goodsSkuPriceList},
-					}; 
+			Map<String ,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("goodsSkuPriceList",goodsSkuPriceList);
 
 			GM.Test(httpClient, keyValueList);
 			System.out.println("response="+GM.response);
@@ -375,11 +367,9 @@ public class GoodsAndSKUTest {
 		GM.Init("delete",url);
 		ArrayList<String> goodsList = new ArrayList<String>();
 		goodsList.add(goodsId);
-		JSONArray goodsIdList = JSONArray.fromObject(goodsList);
 		
-		Object[][] keyValueList = new Object[][]{
-				{"goodsIdList",goodsIdList}
-				}; 
+		Map<String ,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("goodsIdList",goodsList);
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
 		JSONObject responseObject = JSONObject.fromObject(GM.response);

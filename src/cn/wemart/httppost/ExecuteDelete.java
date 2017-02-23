@@ -38,29 +38,14 @@ public class ExecuteDelete {
 	private static Log log = LogFactory.getLog(ExecuteDelete.class);
 	
 	/**
-	 * 组装请求参数
-	 * @param keyVlaueList
-	 */
-	public static Map<Object ,Object> setPostPara(Object[][] keyValueList) throws DocumentException{
-		Map<Object ,Object> map = new HashMap<Object ,Object>();
-		for(int i = 0;i<keyValueList.length;i++)
-		{
-			map.put(keyValueList[i][0],keyValueList[i][1]);
-		}
-		return map;
-	}
-	/**
 	 * 获取接口返回字符串
 	 * @param url,需要传入的参数键值对
 	 */
-	public static String getDeleteMethodResponse(CloseableHttpClient httpClient,String url,Object[][] keyValueList) {
+	public static String getDeleteMethodResponse(CloseableHttpClient httpClient,String url,Map<String ,Object> keyValueList) {
 		String xmlStr =null;
 		String Str;
 		try {
-			
-			Map<Object, Object> postMap;
-			postMap = setPostPara(keyValueList);
-			JSONObject object = JSONObject.fromObject(postMap);
+			JSONObject object = JSONObject.fromObject(keyValueList);
 			List<NameValuePair> postPara = new ArrayList<NameValuePair>();
 			postPara.add(new BasicNameValuePair("para",object.toString()));
 //			log.info(url+"?para="+object.toString()+"");
@@ -87,11 +72,8 @@ public class ExecuteDelete {
 				e.printStackTrace();
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
-			} catch (DocumentException e) {
-				e.printStackTrace();
 			}
 		return xmlStr;
 	}
-	
 
 }

@@ -31,7 +31,7 @@ public class ConfigureManagment {
 	}
 	
 	@Test
-	public String test(String mobile, String password, String sellerId, Object[][] keyValueList) {
+	public String test(String mobile, String password, String sellerId, Map<String,Object> keyValueList) {
 		ShopLogin shopLogin = new ShopLogin();
 		shopLogin.EnterShop(mobile, password, sellerId);
 		System.out.println(shopLogin.response);

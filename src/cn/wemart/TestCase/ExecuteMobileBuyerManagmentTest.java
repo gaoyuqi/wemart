@@ -1,6 +1,8 @@
 package cn.wemart.TestCase;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -70,14 +72,15 @@ public class ExecuteMobileBuyerManagmentTest {
 			if(isDefault[j].equals("true")){
 				flag=true;
 			}
-			Object[][] keyValueList = new Object[][]{
-					{"cityNo",cityNo[j]},
-					{"district",district[j]},
-					{"streetAddr",streetAddr[j]},
-					{"mobileNo",mobileNo[j]},
-					{"name",name[j]},
-					{"isDefault",flag}
-					};
+			
+			Map<String,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("cityNo",cityNo[j]);
+			keyValueList.put("district",district[j]);
+			keyValueList.put("streetAddr",streetAddr[j]);
+			keyValueList.put("mobileNo",mobileNo[j]);
+			keyValueList.put("name",name[j]);
+			keyValueList.put("isDefault",flag);
+			
 			String returnValue = createAddress.test(ScenId[j],BuyerId[j],keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){
 				Reporter.log("创建买家地址成功！");
@@ -121,15 +124,15 @@ public class ExecuteMobileBuyerManagmentTest {
 			JSONArray addrNoArray = responseObject.getJSONArray("data");
 			String addrNo = addrNoArray.getJSONObject(0).getString("addrNo");
 			
-			Object[][] keyValueList = new Object[][]{
-					{"cityNo",cityNo[j]},
-					{"district",district[j]},
-					{"streetAddr",streetAddr[j]},
-					{"mobileNo",mobileNo[j]},
-					{"name",name[j]},
-					{"addrNo",addrNo},
-					{"isDefault",flag}
-					};
+			Map<String,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("cityNo",cityNo[j]);
+			keyValueList.put("district",district[j]);
+			keyValueList.put("streetAddr",streetAddr[j]);
+			keyValueList.put("mobileNo",mobileNo[j]);
+			keyValueList.put("name",name[j]);
+			keyValueList.put("addrNo",addrNo);
+			keyValueList.put("isDefault",flag);
+			
 			String returnValue = updateAddress.test(ScenId[j],BuyerId[j],keyValueList);
 			if(Assertion.verifyEqual(returnValue, "0")){
 				Reporter.log("创建买家地址成功！");

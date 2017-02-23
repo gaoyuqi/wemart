@@ -1,5 +1,7 @@
 package cn.wemart.channelManagment;
 
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -14,7 +16,7 @@ import cn.wemart.util.getCurrent;
 public class CreateChannel {
 	public String response;
 	@Test
-	public String test(String mobile,String password,Object[][] keyValueList){
+	public String test(String mobile,String password,Map<String,Object> keyValueList){
 		ShopLogin shopLogin = new ShopLogin();
 		shopLogin.Login(mobile, password);
 		CloseableHttpClient httpClient = shopLogin.httpClient;

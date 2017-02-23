@@ -1,5 +1,8 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -17,11 +20,11 @@ public class SaveUserInfo {
 		shopLogin.DirectEnterShop(adminAcct, password, type, objectId);
 		CloseableHttpClient httpclient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url + "/api/usermng/admin";
-		Object[][] keyValueList = new Object[][] {
-				{ "mobileNo", "13818811111" },
-				{ "nickName", "我爱北京天安门" },
-				{ "qqAcct", "781615150" },
-				{ "email", "sean@wemart.cn" }, };
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("mobileNo", "13818811111");
+		keyValueList.put("nickName", "我爱北京天安门");
+		keyValueList.put("qqAcct", "781615150");
+		keyValueList.put("email", "sean@wemart.cn");
 
 		Reporter.log(getCurrent.Time());
 		response = ExecutePut.getPutMethodResponse(httpclient, url,keyValueList);

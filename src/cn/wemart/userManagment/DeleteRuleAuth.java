@@ -1,5 +1,8 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -19,10 +22,8 @@ public class DeleteRuleAuth {
 		CloseableHttpClient httpclient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url + "/api/usermng/admin";
 	
-		
-		Object[][] keyValueList = new Object[][]{
-				{"adminNo",deleteAdminId}, // 管理员编号
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("adminNo",deleteAdminId);
 		
 		Reporter.log(getCurrent.Time());
 		response = ExecuteDelete.getDeleteMethodResponse(httpclient, url, keyValueList);

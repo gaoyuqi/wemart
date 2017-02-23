@@ -1,5 +1,8 @@
 package cn.wemart.channelManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -23,9 +26,9 @@ public class IsAllowEnterWemartPlatform {
 		CloseableHttpClient httpClient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url+"/api/usermng/platform";
 		String adminNo = JSONObject.fromObject(shopLogin.response).getJSONObject("data").getString("adminNo");
-		Object[][] keyValueList = new Object[][]{
-				{"adminNo",adminNo}
-				};
+		
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("adminNo",adminNo);
 		Reporter.log(getCurrent.Time());
 		response = ExecuteGet.getGetMethodResponse(httpClient, url, keyValueList);
 		return response;

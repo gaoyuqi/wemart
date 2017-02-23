@@ -1,5 +1,8 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -20,7 +23,7 @@ public class GetAdminInfoByPhoneNO {
 		shopLogin.DirectEnterShop(mobile, password, type, sllerId);
 		CloseableHttpClient httpClient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url+"/api/usermng/admin";
-		Object[][] keyValueList = new Object[][]{};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		
 		Reporter.log(getCurrent.Time());
 		response = ExecuteGet.getGetMethodResponse(httpClient, url, keyValueList);

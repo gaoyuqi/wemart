@@ -1,14 +1,19 @@
 package cn.wemart.TestCase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import cn.wemart.objectbase.ObjectBase;
 import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
+
 import com.TestNG.Assertion;
 
 @Listeners({ com.TestNG.AssertionListener.class })
@@ -30,8 +35,11 @@ public class ScenarioTest {
 	@Test
 	public void createScenario() {
 		ST.Init("post", "url");
-		Object[][] keyValueList = new Object[][] { { "scenType", "1" },
-				{ "name", "我的app场景" }, { "params", "{}" } };
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("scenType", "1");
+		keyValueList.put("name", "我的app场景");
+		keyValueList.put("params", "{}");
+		
 		String returnValue = ST.Test(httpClient, keyValueList);
 		System.out.println(ST.response);
 		if (Assertion.verifyEqual(returnValue, "0")) {
@@ -45,7 +53,9 @@ public class ScenarioTest {
 	@Test
 	public void getScenario() {
 		ST.Init("get", "url");
-		Object[][] keyValueList = new Object[][] { { "scenType", "1" }, };
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("scenType", "1");
+		
 		String returnValue = ST.Test(httpClient, keyValueList);
 		System.out.println(ST.response);
 		if (Assertion.verifyEqual(returnValue, "0")) {

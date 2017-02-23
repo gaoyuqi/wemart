@@ -1,6 +1,8 @@
 package cn.wemart.mobileBuyerManagment;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.json.JSONObject;
 
@@ -9,7 +11,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.TestNG.Assertion;
+
 import cn.wemart.httppost.ExecutePost;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.RSASignature;
@@ -30,12 +34,12 @@ public class BuyerLogin {
 		String scenType = "1";
 		String sign = RSASignature.getSign(scenId, buyerId);
 		if(null != sign){
-			Object[][] keyValueList = new Object[][]{
-					{"scenId" , scenId},
-					{"scenType" , scenType},
-					{"buyerId" , buyerId},
-					{"sign" , sign}
-					}; 
+			
+			Map<String,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("scenId" , scenId);
+			keyValueList.put("scenType" , scenType);
+			keyValueList.put("buyerId" , buyerId);
+			keyValueList.put("sign" , sign);
 			
 			Reporter.log(getCurrent.Time()); 
 			String response = ExecutePost.getPostMethodResponse(httpClient,url,keyValueList);

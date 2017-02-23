@@ -33,7 +33,7 @@ public class Channel {
 		this.url = url;
 	}
 
-	public String test(String mobile, String password, String channelId, Object[][] keyValueList) {
+	public String test(String mobile, String password, String channelId, Map<String,Object> keyValueList) {
 		ShopLogin shopLogin = new ShopLogin();
 		shopLogin.EnterChannel(mobile, password, channelId);
 		System.out.println(shopLogin.response);

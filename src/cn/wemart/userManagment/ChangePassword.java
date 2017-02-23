@@ -1,11 +1,15 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import cn.wemart.httppost.ExecutePut;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -20,11 +24,10 @@ public class ChangePassword {
 		shopLogin.DirectEnterShop(mobile, password, type, sllerId);
 		CloseableHttpClient httpClient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url+"/api/usermng/admin/password";
-		Object[][] keyValueList = new Object[][]{
-				{"oldPassword",password},//旧密码（必填）
-			    {"password",password}, // 新密码 （必填）
-			    {"confirmPassword",password}// 确认密码 （必填）
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("oldPassword",password);
+		keyValueList.put("password",password);
+		keyValueList.put("confirmPassword",password);
 		Reporter.log(getCurrent.Time());
 		response = ExecutePut.getPutMethodResponse(httpClient, url, keyValueList);
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");

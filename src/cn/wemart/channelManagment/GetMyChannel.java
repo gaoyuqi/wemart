@@ -1,10 +1,14 @@
 package cn.wemart.channelManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+
 import cn.wemart.httppost.ExecuteGet;
 import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
@@ -19,7 +23,7 @@ public class GetMyChannel {
 		shopLogin.Login(mobile, password);
 		CloseableHttpClient httpClient = shopLogin.httpClient;
 		String url = LoadAPIInfo.url+"/api/usermng/channel/mychannel";
-		Object[][] keyValueList = new Object[][]{};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		Reporter.log(getCurrent.Time());
 		response = ExecuteGet.getGetMethodResponse(httpClient, url, keyValueList);
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");

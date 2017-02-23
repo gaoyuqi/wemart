@@ -1,11 +1,16 @@
 package cn.wemart.TestCase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.TestNG.Assertion;
+
 import cn.wemart.objectbase.ObjectBase;
 import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.LoadAPIInfo;
@@ -32,16 +37,16 @@ public class ShopTest {
 	@Test
 	public void getMyShopList(){
 		ST.Init("get", url);
-		Object[][] keyValueList = new Object[][]{
-				{"type","apply"}
-				};
-			String returnValue = ST.Test(httpClient, keyValueList);
-			if (Assertion.verifyEqual(returnValue, "0")) {
-				Reporter.log("获取我的店铺列表成功！");
-			} else {
-				Reporter.log("获取我的店铺列表失败！\n Response：" + ST.response);
-			}
-			Reporter.log(getCurrent.Time());
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("type","apply");
+		
+		String returnValue = ST.Test(httpClient, keyValueList);
+		if (Assertion.verifyEqual(returnValue, "0")) {
+			Reporter.log("获取我的店铺列表成功！");
+		} else {
+			Reporter.log("获取我的店铺列表失败！\n Response：" + ST.response);
+		}
+		Reporter.log(getCurrent.Time());
 	}
 	
 	@Test
@@ -58,12 +63,12 @@ public class ShopTest {
 		
 		ST.Init("post", url);
 		for(int j=0;j<shopName.length;j++){
-			Object[][] keyValueList = new Object[][]{
-					{"sellName",shopName[j]},
-					{"logoUrl",logoUrl[j]},
-					{"applyRemark",applyRemark[j]},
-					{"channelId",channelId[j]}
-					};
+			Map<String,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("sellName",shopName[j]);
+			keyValueList.put("logoUrl",logoUrl[j]);
+			keyValueList.put("applyRemark",applyRemark[j]);
+			keyValueList.put("channelId",channelId[j]);
+			
 			String returnValue = ST.Test(httpClient, keyValueList);
 			if (Assertion.verifyEqual(returnValue, "0")) {
 				Reporter.log("申请店铺成功！");

@@ -1,5 +1,8 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -24,9 +27,8 @@ public class IsRegistered {
 	public void isRegistered(String mobile){
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String url = LoadAPIInfo.url + "/api/authmng";
-		Object[][] keyValueList = new Object[][]{
-				{"adminAcct",mobile}
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("adminAcct",mobile);
 		Reporter.log(getCurrent.Time());
 		String response = ExecuteGet.getGetMethodResponse(httpClient, url, keyValueList);
 		String returnMsg = JSONObject.fromObject(response).getString("returnMsg");

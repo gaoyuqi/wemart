@@ -1,5 +1,8 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -22,9 +25,8 @@ public class VertifyCode {
 	public void getVertifyCode(String mobile){
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String url = LoadAPIInfo.url + "/api/authmng/vertifycode";
-		Object[][] keyValueList = new Object[][]{
-				{"mobileNo",mobile}
-				};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("mobileNo",mobile);
 		Reporter.log(getCurrent.Time());
 		String response = ExecuteGet.getGetMethodResponse(httpClient, url, keyValueList);
 		String returnMsg = JSONObject.fromObject(response).getString("returnMsg");

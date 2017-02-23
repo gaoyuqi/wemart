@@ -1,11 +1,16 @@
 package cn.wemart.TestCase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.TestNG.Assertion;
+
 import cn.wemart.userManagment.Channel;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.ReadExcel;
@@ -18,11 +23,11 @@ public class ExecuteShopApplyManagementTest {
 		String response;
 		String url = LoadAPIInfo.url+"/api/usermng/channel/sellerapplylist";
 		Channel channel = new Channel("get", url);
-		Object[][] keyValueList = new Object[][]{
-				{"pageIndex",0},
-				{"pageSize",10},
-				{"status",1}
-				};
+		
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("pageIndex",0);
+		keyValueList.put("pageSize",10);
+		keyValueList.put("status",1);
 		String returnValue = channel.test(mobile, password, channelId, keyValueList);
 		response = channel.response;
 		if (Assertion.verifyEqual(returnValue, "0")) {
@@ -48,11 +53,11 @@ public class ExecuteShopApplyManagementTest {
 			if(response.contains("applyNo")){
 				JSONObject data = JSONObject.fromObject(response).getJSONObject("data");
 				String 	applyNo = data.getJSONArray("sellerApplyList").getJSONObject(0).getString("applyNo");
-				Object[][] keyValueList = new Object[][]{
-						{"applyNo",applyNo},
-						{"status","2"},    // 2未通过，3通过
-						{"approveRemark","这里是审核说明"}
-						};
+				
+				Map<String,Object> keyValueList = new HashMap<String,Object>();
+				keyValueList.put("applyNo",applyNo);
+				keyValueList.put("status","2");
+				keyValueList.put("approveRemark","这里是审核说明");
 				String returnValue = channel.test(mobile[j], password[j], channelId[j], keyValueList);
 				if (Assertion.verifyEqual(returnValue, "0")) {
 					Reporter.log("审核店铺成功！");

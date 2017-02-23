@@ -1,11 +1,15 @@
 package cn.wemart.userManagment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import cn.wemart.httppost.ExecutePost;
 import cn.wemart.util.LoadAPIInfo;
 import cn.wemart.util.getCurrent;
@@ -25,7 +29,7 @@ public class LogOut {
 		CloseableHttpClient httpClient = shopLogin.httpClient;
 		
 		String url = LoadAPIInfo.url+"/api/authmng/quit";
-		Object[][] keyValueList = new Object[][]{};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 
 		Reporter.log(getCurrent.Time());
 		String response = ExecutePost.getPostMethodResponse(httpClient, url, keyValueList);

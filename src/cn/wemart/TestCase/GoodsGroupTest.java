@@ -3,24 +3,16 @@ package cn.wemart.TestCase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import com.TestNG.Assertion;
-
-import cn.wemart.mobileBuyerManagment.UpdateAddress;
 import cn.wemart.objectbase.ObjectBase;
 import cn.wemart.userManagment.ShopLogin;
 import cn.wemart.util.GetDataDB;
 import cn.wemart.util.LoadAPIInfo;
-import cn.wemart.util.getCurrent;
 
 @Listeners({com.TestNG.AssertionListener.class})
 public class GoodsGroupTest {
@@ -47,25 +39,22 @@ public class GoodsGroupTest {
 		Map<Object ,Object> SubGoodsGroup1 = new HashMap<Object,Object>();
 		SubGoodsGroup1.put("groupName", "lv2-1");
 		SubGoodsGroup1.put("navSortno", 1);
-		JSONObject SubGoodsGroup1Object = JSONObject.fromObject(SubGoodsGroup1);
 		
 		Map<Object ,Object> SubGoodsGroup2 = new HashMap<Object,Object>();
 		SubGoodsGroup2.put("groupName", "lv2-2");
 		SubGoodsGroup2.put("navSortno", 2);
-		JSONObject SubGoodsGroup2Object = JSONObject.fromObject(SubGoodsGroup2);
 		
-		ArrayList<Object> subGroup = new ArrayList<Object>();
-		subGroup.add(SubGoodsGroup1Object);
-		subGroup.add(SubGoodsGroup2Object);
-		JSONArray subGroupList = JSONArray.fromObject(subGroup);
+		ArrayList<Object> subGroupList = new ArrayList<Object>();
+		subGroupList.add(SubGoodsGroup1);
+		subGroupList.add(SubGoodsGroup2);
 		
 		JSONArray ListEmpty = JSONArray.fromObject("[]");
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("groupName","group-level2");
+		keyValueList.put("parentNo",0);
+		keyValueList.put("subGroupList",subGroupList);
 		
-		Object[][] keyValueList = new Object[][]{
-				{"groupName","group-level2"},
-				{"parentNo",0},
-				{"subGroupList",subGroupList}
-				}; 
+		
 		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
@@ -85,11 +74,10 @@ public class GoodsGroupTest {
 		String url = LoadAPIInfo.url+"/api/goodsmng/group";
 		GM.Init("put", url);
 
-		Object[][] keyValueList = new Object[][]{
-				{"groupName","groupTest"},
-				{"groupNo",groupId},
-				{"navSortno",0}
-				}; 
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("groupName","groupTest");
+		keyValueList.put("groupNo",groupId);
+		keyValueList.put("navSortno",0);
 		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
@@ -107,9 +95,7 @@ public class GoodsGroupTest {
 	public void GetGoodsGroup(){
 		String url = LoadAPIInfo.url+"/api/goodsmng/group";
 		GM.Init("get", url);
-
-		Object[][] keyValueList = new Object[][]{}; 
-		
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
 		JSONObject responseObject = JSONObject.fromObject(GM.response);
@@ -127,9 +113,8 @@ public class GoodsGroupTest {
 		String url = LoadAPIInfo.url+"/api/goodsmng/group";
 		GM.Init("delete", url);
 
-		Object[][] keyValueList = new Object[][]{
-				{"groupNo",groupId}
-				}; 
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("groupNo",groupId);
 		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
@@ -164,13 +149,10 @@ public class GoodsGroupTest {
 			goodsId.put("ingrpSortno", 0);
 			goodsList.add(goodsId);
 		}
-		JSONArray goodsArray = JSONArray.fromObject(goodsList);
-		System.out.println(goodsArray.toString());
 		
-		Object[][] keyValueList = new Object[][]{
-				{"groupNoList",groupIdList},
-				{"goodsList",goodsArray}
-				}; 
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("groupNoList",groupIdList);
+		keyValueList.put("goodsList",goodsList);
 		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
@@ -205,13 +187,11 @@ public class GoodsGroupTest {
 			goodsId.put("goodsId", goods);
 			goodsList.add(goodsId);
 		}
-		JSONArray goodsArray = JSONArray.fromObject(goodsList);
-		System.out.println(goodsArray.toString());
 		
-		Object[][] keyValueList = new Object[][]{
-				{"groupNoList",groupIdList},
-				{"goodsList",goodsArray}
-				}; 
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("groupNoList",groupIdList);
+		keyValueList.put("goodsList",goodsList);
+		
 		
 		GM.Test(httpClient, keyValueList);
 		System.out.println("response="+GM.response);
@@ -228,6 +208,6 @@ public class GoodsGroupTest {
 	
 	public static void main(String[] args) {
 		GoodsGroupTest GGT = new GoodsGroupTest();
-		GGT.GroupDeleteGoods();
+		GGT.CreateGoodsGroup();
 	}
 }

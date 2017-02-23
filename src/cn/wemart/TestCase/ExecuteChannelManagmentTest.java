@@ -1,5 +1,8 @@
 package cn.wemart.TestCase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.json.JSONObject;
 
 import org.testng.Reporter;
@@ -34,12 +37,12 @@ public class ExecuteChannelManagmentTest {
 		String[] allowSellerSelf = allowSellerSelfList.split(",");
 		CreateChannel createChannel = new CreateChannel();
 		for(int i=0;i<name.length;i++){
-			Object[][] keyValueList = new Object[][] { 
-					{ "name", name[i]},
-					{ "logoUrl", logoUrl[i]},
-					{ "applyRemark", applyRemark[i] },
-					{ "allowSellerSelf", allowSellerSelf[i] } // 0表示平台商户只能使用平台的收款方式, 1表示平台商户可以设置自己的收款方式
-					};
+			Map<String,Object> keyValueList = new HashMap<String,Object>();
+			keyValueList.put("name", name[i]);
+			keyValueList.put("logoUrl", logoUrl[i]);
+			keyValueList.put("applyRemark", applyRemark[i]);
+			keyValueList.put("allowSellerSelf", allowSellerSelf[i]);
+			
 			String returnValue = createChannel.test(mobile[i], password[i],keyValueList);
 			if (Assertion.verifyEqual(returnValue, "0")) {
 				Reporter.log("创建渠道成功！");

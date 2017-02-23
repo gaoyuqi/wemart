@@ -1,6 +1,8 @@
 package cn.wemart.userManagment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -29,13 +31,12 @@ public class ShopLogin {
 	public CloseableHttpClient DirectEnterShop(String adminAcct, String password,String type, String objectId) {
 		String url = LoadAPIInfo.url + LoadAPIInfo.userLoginAPI;
 
-		Object[][] keyValueList = new Object[][] {
-					{ "adminAcct", adminAcct },
-					{ "password", password },
-					{ "type", type },
-					{ "objectId", objectId }
-					};
-
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("adminAcct", adminAcct);
+		keyValueList.put("password", password);
+		keyValueList.put("type", type);
+		keyValueList.put("objectId", objectId);
+		
 		Reporter.log(getCurrent.Time());
 		response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
 		String returnValue = JSONObject.fromObject(response).getString("returnValue");
@@ -56,10 +57,9 @@ public class ShopLogin {
 	public CloseableHttpClient Login(String adminAcct,String password){
 		String url = LoadAPIInfo.url + LoadAPIInfo.userLoginAPI;
 		
-		Object[][] keyValueList = new Object[][] {
-					{ "adminAcct", adminAcct },
-					{ "password", password }
-					};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("adminAcct", adminAcct);
+		keyValueList.put("password", password);
 
 		Reporter.log(getCurrent.Time());
 		response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
@@ -84,9 +84,9 @@ public class ShopLogin {
 		httpClient = Login(mobile,password);
 		String url = LoadAPIInfo.url + LoadAPIInfo.userLoginAPI;
 
-		Object[][] keyValueList = new Object[][] {
-					{ "sellId", sellId }
-					};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("sellId", sellId);
+		
 
 		Reporter.log(getCurrent.Time());
 		response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
@@ -110,9 +110,8 @@ public class ShopLogin {
 		httpClient = Login(mobile,password);
 		String url = LoadAPIInfo.url + LoadAPIInfo.userLoginAPI;
 
-		Object[][] keyValueList = new Object[][] {
-					{ "chanId", channelId }
-					};
+		Map<String,Object> keyValueList = new HashMap<String,Object>();
+		keyValueList.put("chanId", channelId);
 
 		Reporter.log(getCurrent.Time());
 		response = ExecutePost.getPostMethodResponse(httpClient, url,keyValueList);
