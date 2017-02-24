@@ -1,4 +1,4 @@
-package cn.wemart.TestCase;
+package cn.wemart.TestCase.PC;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;

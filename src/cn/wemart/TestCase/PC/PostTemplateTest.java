@@ -1,4 +1,4 @@
-package cn.wemart.TestCase;
+package cn.wemart.TestCase.PC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import net.sf.json.JSONObject;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.testng.Reporter;
+import org.testng.annotations.Test;
 
 import com.TestNG.Assertion;
 
@@ -36,6 +37,7 @@ public class PostTemplateTest {
 		httpClient = shopLogin.httpClient;
 	}
 	
+	@Test
 	public void CreatePostTemplate(){
 		PTT.Init("post", url);
 		String dataBaseName = "wmplatform_gm";
@@ -69,6 +71,7 @@ public class PostTemplateTest {
 		Reporter.log(getCurrent.Time());
 	}
 	
+	@Test
 	public void UpdatePostTemplate(){
 		PTT.Init("put", url);
 		String dataBaseName = "wmplatform_gm";
@@ -104,6 +107,7 @@ public class PostTemplateTest {
 		Reporter.log(getCurrent.Time());
 	}
 	
+	@Test
 	public void GetPostTemplate(){
 		PTT.Init("get", url);
 		Map<String,Object> keyValueList = new HashMap<String,Object>();
@@ -119,6 +123,7 @@ public class PostTemplateTest {
 		Reporter.log(getCurrent.Time());
 	}
 	
+	@Test
 	public void DeletePostTemplate(){
 		PTT.Init("delete", url);
 		if(faretmpltNo != null){ 
@@ -138,6 +143,7 @@ public class PostTemplateTest {
 		}
 	}
 
+	@Test
 	public void GetGoodsPostTemplate(){
 		String url = LoadAPIInfo.url + "/api/goodsmng/faretmplt/goods";
 		PTT.Init("get", url);
